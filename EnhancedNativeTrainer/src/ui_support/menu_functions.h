@@ -20,6 +20,8 @@ https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 #include "..\io\io.h"
 #include "..\features\airbrake.h"
 #include "..\utils.h"
+//#include "..\features\misc.h"
+//#include "..\features\script.h"
 
 #include "entcolor.h"
 
@@ -43,6 +45,10 @@ extern bool mouse_view_control;
 extern bool help_showing;
 extern bool frozen_time;
 extern bool been_damaged;
+
+// Trainer Scrolling Controls
+const std::vector<std::string> MISC_TRAINERCONTROLSCROLLING_CAPTIONS{ "Page Scrolling", "Fast Scroll" };
+extern int TrainerControlScrollingIndex;
 
 static const char* LOCAL_TEXTURE_DICT = "LOCALTEXTURES";
 
@@ -544,7 +550,8 @@ void draw_rect(float A_0, float A_1, float A_2, float A_3, int A_4, int A_5, int
 
 void draw_ingame_sprite(MenuItemImage* image, float x, float y, int w, int h);
 
-inline std::string sanitise_menu_header_text(std::string input) {
+/* Sanitise the header by removing the character if it's not alpha-numeric ASCII, empty or invalid UTF-8 (check the high bit is set on the character) else return the full caption */
+inline std::string sanitise_menu_header_text(std::string input){
 	std::string caption(input);
 	std::replace(caption.begin(), caption.end(), '-', ' ');
 	std::replace(caption.begin(), caption.end(), '_', ' ');
@@ -1209,7 +1216,8 @@ bool draw_generic_menu(MenuParameters<T> params) {
 			}
 
 			WAIT(0);
-		} while (GetTickCount() < maxTickCount);
+		}
+		while(GetTickCount() < maxTickCount);
 		waitTime = 0;
 
 		bool bSelect, bBack, bUp, bDown, bLeft, bRight;
@@ -1217,7 +1225,7 @@ bool draw_generic_menu(MenuParameters<T> params) {
 
 		choice = params.items[currentSelectionIndex];
 
-		if (bSelect) {
+		if(bSelect){
 			menu_beep();
 
 			waitTime = 200;
@@ -1241,22 +1249,69 @@ bool draw_generic_menu(MenuParameters<T> params) {
 				result = false;
 				break;
 			}
-			else {
-				if (bDown) {
+			else{
+				if(bDown){// If the user presses the Down key
 					menu_beep();
-					currentSelectionIndex++;
-					if (currentSelectionIndex >= totalItems || (currentSelectionIndex >= lineStartPosition + itemsOnThisLine)) {
-						currentSelectionIndex = lineStartPosition;
+					if (TrainerControlScrollingIndex == 0)
+					{
+						currentSelectionIndex++;
+						if (currentSelectionIndex >= totalItems || (currentSelectionIndex >= lineStartPosition + itemsOnThisLine)) {
+							currentSelectionIndex = lineStartPosition;
+						}
 					}
-					waitTime = 150;
+					else
+					if(TrainerControlScrollingIndex == 1 && currentSelectionIndex < lineStartPosition + itemsOnThisLine - 1 && currentSelectionIndex < totalItems - 1) 
+					{
+						currentSelectionIndex++; // Not at bottom, move down normally
+					} 
+					else {
+						int currentPage = lineStartPosition / itemsPerLine; // Calculate current page
+						int maxPages = (totalItems + itemsPerLine - 1) / itemsPerLine; // Total pages
+						if(currentPage < maxPages - 1){ // If next page exists
+							currentPage++;
+							lineStartPosition = currentPage * itemsPerLine; // Update page start index
+							itemsOnThisLine = min(itemsPerLine, totalItems - lineStartPosition); // Update items on current page
+							currentSelectionIndex = lineStartPosition; // Jump to new page top
+						} else {
+							// Reached bottom of last page, wrap to first page top
+							currentPage = 0;
+							lineStartPosition = 0;
+							itemsOnThisLine = min(itemsPerLine, totalItems); // First page items
+							currentSelectionIndex = 0; // Move to first page top (first item)
+						}
+					}
+					waitTime = 150; // Set wait time to 150ms to prevent repeated triggers
 				}
-				else if (bUp) {
+				else if(bUp){// If the user presses the Up key
 					menu_beep();
-					currentSelectionIndex--;
-					if (currentSelectionIndex < 0 || (currentSelectionIndex < lineStartPosition)) {
-						currentSelectionIndex = lineStartPosition + itemsOnThisLine - 1;
+					if (TrainerControlScrollingIndex == 0)
+					{
+						currentSelectionIndex--;
+						if (currentSelectionIndex < 0 || (currentSelectionIndex < lineStartPosition)) {
+							currentSelectionIndex = lineStartPosition + itemsOnThisLine - 1;
+						}
 					}
-					waitTime = 150;
+					else
+					if (TrainerControlScrollingIndex == 1 && currentSelectionIndex > lineStartPosition)
+					{
+						currentSelectionIndex--; // Not at top, move up normally
+					} else {
+						int currentPage = lineStartPosition / itemsPerLine; // Calculate current page
+						int maxPages = (totalItems + itemsPerLine - 1) / itemsPerLine; // Total pages
+						if(currentPage > 0){ // If previous page exists
+							currentPage--;
+							lineStartPosition = currentPage * itemsPerLine; // Update page start index
+							itemsOnThisLine = min(itemsPerLine, totalItems - lineStartPosition); // Update items on current page
+							currentSelectionIndex = lineStartPosition + itemsOnThisLine - 1; // Jump to new page bottom
+						} else {
+							// Reached first page top, wrap to last item
+							currentSelectionIndex = totalItems - 1; // Directly target last item
+							currentPage = maxPages - 1; // Set to last page
+							lineStartPosition = currentPage * itemsPerLine; // Update page start to ensure visibility
+							itemsOnThisLine = min(itemsPerLine, totalItems - lineStartPosition); // Update items on current page
+						}
+					}
+					waitTime = 150; // Set wait time to 150ms to prevent repeated triggers
 				}
 				else if (bLeft) {
 					menu_beep();
