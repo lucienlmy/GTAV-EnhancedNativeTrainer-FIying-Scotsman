@@ -762,6 +762,10 @@ void write_config_ini_file(){
 
 void KeyInputConfig::set_key(char* function, char* keyName, bool modCtrl, bool modAlt, bool modShift)
 {
+    std::stringstream ss;
+    ss << "Setting key for " << function << ": " << keyName;
+    write_text_to_log_file(ss.str());
+    
     // 判断是否为游戏按键名称
     if(strncmp(keyName, "INPUT_", 6) == 0) {
         // 从eButton枚举获取游戏按键值
@@ -771,6 +775,7 @@ void KeyInputConfig::set_key(char* function, char* keyName, bool modCtrl, bool m
             if(match != keyConfigs.end()) {
                 KeyConfig* oldConfig = match->second;
                 match->second = new KeyConfig(0, gameButton); // 使用游戏按键
+				match->second->useGameButton = true;  // 这里设置了使用游戏按键
                 match->second->modCtrl = modCtrl;
                 match->second->modAlt = modAlt;
                 match->second->modShift = modShift;
@@ -781,8 +786,23 @@ void KeyInputConfig::set_key(char* function, char* keyName, bool modCtrl, bool m
     }
 
     // 原有的VK键值处理
+    // VK键值处理
     int vkID = keyNameToVal(keyName);
-    // ...原有代码...
+    if(vkID != -1) {
+        auto match = keyConfigs.find(function);
+        if(match != keyConfigs.end()) {
+            KeyConfig* oldConfig = match->second;
+            match->second = new KeyConfig(vkID);
+            match->second->useGameButton = false; // 确保使用VK按键
+            match->second->modCtrl = modCtrl;
+            match->second->modAlt = modAlt; 
+            match->second->modShift = modShift;
+            delete oldConfig;
+        }
+        ss.str("");
+        ss << "VK key set: " << vkID;
+        write_text_to_log_file(ss.str());
+    }
 }
 
 bool KeyInputConfig::is_hotkey_assigned(int i){

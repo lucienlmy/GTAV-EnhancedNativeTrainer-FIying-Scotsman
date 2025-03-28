@@ -85,13 +85,19 @@ public:
     inline KeyConfig(int code) {
         this->keyCode = code;
         this->gameButton = -1;
-        this->useGameButton = false;
+        this->useGameButton = false;  // VK按键
+        this->modCtrl = false;
+        this->modAlt = false;
+        this->modShift = false;
     }
 
     inline KeyConfig(int code, int button) {
         this->keyCode = code;
         this->gameButton = button;
-        this->useGameButton = true;
+        this->useGameButton = true;   // 游戏按键
+        this->modCtrl = false;
+        this->modAlt = false;
+        this->modShift = false;
     }
 };
 

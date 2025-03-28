@@ -43,6 +43,9 @@ bool IsKeyDown(DWORD key, bool isGameButton)
         return CONTROLS::IS_CONTROL_PRESSED(2, key);
     } else {
         return (GetAsyncKeyState(key) & 0x8000) != 0;
+        // 同时检查GetAsyncKeyState和GetKeyState
+       // return ((GetAsyncKeyState(key) & 0x8000) || (GetKeyState(key) & 0x8000));
+                
     }
 }
 
@@ -95,7 +98,7 @@ bool IsKeyJustUp(DWORD key, bool isGameButton, bool exclusive)
     if(isGameButton) {
         return CONTROLS::IS_CONTROL_JUST_RELEASED(2, key); 
     }
-
+    // 检查OnKeyboardMessage记录的状态
     bool b = (key < KEYS_SIZE) ? (GetTickCount() < keyStates[key].time + NOW_PERIOD && keyStates[key].isUpNow) : false;
     if(b && exclusive) {
         ResetKeyState(key);
