@@ -1,4 +1,4 @@
-/*
+﻿/*
 Some of this code began its life as a part of GTA V SCRIPT HOOK SDK.
 http://dev-c.com
 (C) Alexander Blade 2015
@@ -40,23 +40,56 @@ bool trainer_switch_pressed()
 	return result;
 }
 
-void get_button_state(bool *a, bool *b, bool *up, bool *down, bool *l, bool *r)
+void get_button_state(bool* a, bool* b, bool* up, bool* down, bool* l, bool* r)
 {
-	KeyInputConfig *keyConf = config->get_key_config();
-	if (a) *a = IsKeyJustUp(KeyConfig::KEY_MENU_SELECT) || CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_ACCEPT); //A //IS_DISABLED_CONTROL_PRESSED
-	if (b) *b = (is_menu_showing() && !IsKeyJustUp(VK_ESCAPE) && IsKeyJustUp(KeyConfig::KEY_MENU_BACK)) || (is_menu_showing() && (CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_CANCEL) || CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_PAUSE))); //B
+	KeyInputConfig* keyConf = config->get_key_config();
+	// 确认键 - 数字键盘5和游戏按键
+	if (a) *a = IsKeyJustUp(KeyConfig::KEY_MENU_SELECT) ||
+		IsKeyJustUp(VK_NUMPAD5) ||
+		CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_ACCEPT); //A //IS_DISABLED_CONTROL_PRESSED
 
-	if (MISC_TRAINERCONTROL_VALUES[TrainerControlIndex] == 1) { // press
-		if (up) *up = IsKeyDown(KeyConfig::KEY_MENU_UP) || CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_UP); //Dpad up
-		if (down) *down = IsKeyDown(KeyConfig::KEY_MENU_DOWN) || CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_DOWN); //Dpad down
-		if (r) *r = IsKeyDown(KeyConfig::KEY_MENU_RIGHT) || CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_RIGHT); //Dpad right
-		if (l) *l = IsKeyDown(KeyConfig::KEY_MENU_LEFT) || CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_LEFT); //Dpad left
+	// 返回键 - 数字键盘0和游戏按键
+	if (b) *b = (is_menu_showing() && !IsKeyJustUp(VK_ESCAPE) &&
+		(IsKeyJustUp(KeyConfig::KEY_MENU_BACK) || IsKeyJustUp(VK_NUMPAD0))) ||
+		(is_menu_showing() && (CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_CANCEL) ||
+			CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_PAUSE))); //B
+
+	if (MISC_TRAINERCONTROL_VALUES[TrainerControlIndex] == 1)
+	{ // press
+		// 同时检查配置的按键、固定的数字键盘和游戏按键
+		if (up) *up = IsKeyDown(KeyConfig::KEY_MENU_UP) ||
+			IsKeyDown(VK_NUMPAD8) ||
+			CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_UP); //Dpad up
+
+		if (down) *down = IsKeyDown(KeyConfig::KEY_MENU_DOWN) ||
+			IsKeyDown(VK_NUMPAD2) ||
+			CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_DOWN); //Dpad down
+
+		if (r) *r = IsKeyDown(KeyConfig::KEY_MENU_RIGHT) ||
+			IsKeyDown(VK_NUMPAD6) ||
+			CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_RIGHT); //Dpad right
+
+		if (l) *l = IsKeyDown(KeyConfig::KEY_MENU_LEFT) ||
+			IsKeyDown(VK_NUMPAD4) ||
+			CONTROLS::IS_DISABLED_CONTROL_PRESSED(2, INPUT_FRONTEND_LEFT); //Dpad left
 	}
-	if (MISC_TRAINERCONTROL_VALUES[TrainerControlIndex] == 0) { // release
-		if (up) *up = IsKeyJustUp(KeyConfig::KEY_MENU_UP) || CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_UP);
-		if (down) *down = IsKeyJustUp(KeyConfig::KEY_MENU_DOWN) || CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_DOWN);
-		if (r) *r = IsKeyJustUp(KeyConfig::KEY_MENU_RIGHT) || CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_RIGHT);
-		if (l) *l = IsKeyJustUp(KeyConfig::KEY_MENU_LEFT) || CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_LEFT);
+	if (MISC_TRAINERCONTROL_VALUES[TrainerControlIndex] == 0)
+	{ // release
+		if (up) *up = IsKeyJustUp(KeyConfig::KEY_MENU_UP) ||
+			IsKeyJustUp(VK_NUMPAD8) ||
+			CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_UP);
+
+		if (down) *down = IsKeyJustUp(KeyConfig::KEY_MENU_DOWN) ||
+			IsKeyJustUp(VK_NUMPAD2) ||
+			CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_DOWN);
+
+		if (r) *r = IsKeyJustUp(KeyConfig::KEY_MENU_RIGHT) ||
+			IsKeyJustUp(VK_NUMPAD6) ||
+			CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_RIGHT);
+
+		if (l) *l = IsKeyJustUp(KeyConfig::KEY_MENU_LEFT) ||
+			IsKeyJustUp(VK_NUMPAD4) ||
+			CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(2, INPUT_FRONTEND_LEFT);
 	}
 }
 

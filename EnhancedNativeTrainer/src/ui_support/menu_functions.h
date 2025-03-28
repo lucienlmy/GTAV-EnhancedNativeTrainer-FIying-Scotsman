@@ -1280,7 +1280,7 @@ bool draw_generic_menu(MenuParameters<T> params) {
 							currentSelectionIndex = 0; // Move to first page top (first item)
 						}
 					}
-					waitTime = 150; // Set wait time to 150ms to prevent repeated triggers
+					waitTime = 10; // Set wait time to 150ms to prevent repeated triggers
 				}
 				else if(bUp){// If the user presses the Up key
 					menu_beep();
@@ -1311,7 +1311,7 @@ bool draw_generic_menu(MenuParameters<T> params) {
 							itemsOnThisLine = min(itemsPerLine, totalItems - lineStartPosition); // Update items on current page
 						}
 					}
-					waitTime = 150; // Set wait time to 150ms to prevent repeated triggers
+					waitTime = 10; // Set wait time to 150ms to prevent repeated triggers
 				}
 				else if (bLeft) {
 					menu_beep();
