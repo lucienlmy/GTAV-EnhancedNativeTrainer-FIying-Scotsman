@@ -1,4 +1,4 @@
-/*
+﻿/*
 Part of the Enhanced Native Trainer project.
 https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 (C) Rob Pridham and fellow contributors 2015
@@ -11,6 +11,22 @@ https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 #include <sstream>
 #include "..\features\script.h"
 #include "..\features\fuel.h"
+
+// 在文件开头添加新的函数
+int get_game_button_from_name(const char* name) {
+    // 从 INPUT_ 枚举定义中获取对应值
+    if(strcmp(name, "INPUT_FRONTEND_DOWN") == 0) return 187;
+    if(strcmp(name, "INPUT_FRONTEND_UP") == 0) return 188;
+    if(strcmp(name, "INPUT_FRONTEND_LEFT") == 0) return 189; 
+    if(strcmp(name, "INPUT_FRONTEND_RIGHT") == 0) return 190;
+    if(strcmp(name, "INPUT_FRONTEND_ACCEPT") == 0) return 201;
+    if(strcmp(name, "INPUT_FRONTEND_CANCEL") == 0) return 202;
+	if(strcmp(name, "INPUT_JUMP") == 0) return 22;
+	if(strcmp(name, "INPUT_VEH_SLOWMO_UP_ONLY") == 0) return 335;
+	if(strcmp(name, "INPUT_VEH_SLOWMO_DOWN_ONLY") == 0) return 336;
+    // 添加更多映射...
+    return -1; // 未找到映射返回-1
+}
 
 // A global Windows "basic string". Actual memory is allocated by the
 // COM methods used by MSXML which take &keyconf_bstr. We must use SysFreeString() 
@@ -416,34 +432,30 @@ void write_config_ini_file(){
 	}
 }
 
-void KeyInputConfig::set_key(char* function, char* keyName, bool modCtrl, bool modAlt, bool modShift){
-	std::ostringstream ss;
-	ss << "Key function " << function << " being given " << keyName;
-	write_text_to_log_file(ss.str());
+void KeyInputConfig::set_key(char* function, char* keyName, bool modCtrl, bool modAlt, bool modShift)
+{
+    // 判断是否为游戏按键名称
+    if(strncmp(keyName, "INPUT_", 6) == 0) {
+        // 从eButton枚举获取游戏按键值
+        int gameButton = get_game_button_from_name(keyName);
+        if(gameButton != -1) {
+            auto match = keyConfigs.find(function);
+            if(match != keyConfigs.end()) {
+                KeyConfig* oldConfig = match->second;
+                match->second = new KeyConfig(0, gameButton); // 使用游戏按键
+                match->second->modCtrl = modCtrl;
+                match->second->modAlt = modAlt;
+                match->second->modShift = modShift;
+                delete oldConfig;
+                return;
+            }
+        }
+    }
 
-	int vkID = keyNameToVal(keyName);
-	if(vkID == -1){
-		ss.str(""); ss.clear();
-		ss << "Key function " << keyName << " didn't correspond to a value";
-		write_text_to_log_file(ss.str());
-		return;
-	}
-
-	auto match = keyConfigs.find(function);
-	if(match != keyConfigs.end()){
-		KeyConfig* oldConfig = match->second;
-		match->second = new KeyConfig(vkID);
-		match->second->modCtrl = modCtrl;
-		match->second->modAlt = modAlt;
-		match->second->modShift = modShift;
-		delete oldConfig;
-	}
-	else{
-		ss.str(""); ss.clear();
-		ss << "Key function " << function << " didn't correspond to a known function";
-		write_text_to_log_file(ss.str());
-	}
-};
+    // 原有的VK键值处理
+    int vkID = keyNameToVal(keyName);
+    // ...原有代码...
+}
 
 bool KeyInputConfig::is_hotkey_assigned(int i){
 

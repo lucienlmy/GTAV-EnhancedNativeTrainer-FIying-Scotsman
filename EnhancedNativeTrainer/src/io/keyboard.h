@@ -1,4 +1,4 @@
-/*
+﻿/*
 		THIS FILE IS A PART OF GTA V SCRIPT HOOK SDK
 					http://dev-c.com
 				(C) Alexander Blade 2015
@@ -8,6 +8,7 @@
 
 #include <windows.h>
 #include "..\io\config_io.h"
+#include <string>
 
 #define VK_NOTHING 0x0
 #define VK_KEY_0	0x30                //('0')	0
@@ -50,13 +51,16 @@
 // parameters are the same as with aru's ScriptHook for IV
 void OnKeyboardMessage(DWORD key, WORD repeats, BYTE scanCode, BOOL isExtended, BOOL isWithAlt, BOOL wasDownBefore, BOOL isUpNow);
 
-bool IsKeyDown(DWORD key);
+// 按键状态检查函数
+bool IsKeyDown(DWORD key, bool isGameButton = false); // 只在头文件保留默认参数
 bool IsKeyDown(std::string keyName);
 
 bool IsKeyJustUp(DWORD key, bool exclusive = true);
+bool IsKeyJustUp(DWORD key, bool isGameButton, bool exclusive); 
 bool IsKeyJustUp(std::string keyName, bool exclusive = true);
 
 void ResetKeyState(DWORD key);
+int keyNameToVal(char* input);
 
 struct VirtualKeysWithNames
 {

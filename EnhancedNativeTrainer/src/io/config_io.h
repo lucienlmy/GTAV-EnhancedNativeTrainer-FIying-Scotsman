@@ -1,4 +1,4 @@
-/*
+﻿/*
 Part of the Enhanced Native Trainer project.
 https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 (C) Rob Pridham and fellow contributors 2015
@@ -18,72 +18,81 @@ https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 
 #include "keyboard.h"
 
-class KeyConfig{
-	public:
+class KeyConfig {
+public:
+    static const std::string KEY_TOGGLE_MAIN_MENU;
+    static const std::string KEY_TOGGLE_AIRBRAKE;
 
-	static const std::string KEY_TOGGLE_MAIN_MENU;
-	static const std::string KEY_TOGGLE_AIRBRAKE;
+    static const std::string KEY_MENU_UP;
+    static const std::string KEY_MENU_DOWN;
+    static const std::string KEY_MENU_LEFT;
+    static const std::string KEY_MENU_RIGHT;
+    static const std::string KEY_MENU_SELECT;
+    static const std::string KEY_MENU_BACK;
 
-	static const std::string KEY_MENU_UP;
-	static const std::string KEY_MENU_DOWN;
-	static const std::string KEY_MENU_LEFT;
-	static const std::string KEY_MENU_RIGHT;
-	static const std::string KEY_MENU_SELECT;
-	static const std::string KEY_MENU_BACK;
+    static const std::string KEY_VEH_BOOST;
+    static const std::string KEY_VEH_STOP;
+    static const std::string KEY_VEH_ROCKETS;
+    static const std::string KEY_VEH_LEFTBLINK;
+    static const std::string KEY_VEH_RIGHTBLINK;
+    static const std::string KEY_VEH_EMERGENCYBLINK;
+    static const std::string KEY_VEH_STARTREFUELING;
+    static const std::string KEY_VEH_STOPREFUELING;
 
-	static const std::string KEY_VEH_BOOST;
-	static const std::string KEY_VEH_STOP;
-	static const std::string KEY_VEH_ROCKETS;
-	static const std::string KEY_VEH_LEFTBLINK;
-	static const std::string KEY_VEH_RIGHTBLINK;
-	static const std::string KEY_VEH_EMERGENCYBLINK;
-	static const std::string KEY_VEH_STARTREFUELING;
-	static const std::string KEY_VEH_STOPREFUELING;
-	
-	static const std::string KEY_AIRBRAKE_UP;
-	static const std::string KEY_AIRBRAKE_DOWN;
-	static const std::string KEY_AIRBRAKE_ROTATE_LEFT;
-	static const std::string KEY_AIRBRAKE_ROTATE_RIGHT;
-	static const std::string KEY_AIRBRAKE_FORWARD;
-	static const std::string KEY_AIRBRAKE_BACK;
-	static const std::string KEY_AIRBRAKE_SPEED;
-	static const std::string KEY_AIRBRAKE_FREEZE_TIME;
-	static const std::string KEY_AIRBRAKE_HELP;
-	static const std::string KEY_AIRBRAKE_SPACE;
-	static const std::string KEY_AIRBRAKE_MOUSE_CONTROL;
+    static const std::string KEY_AIRBRAKE_UP;
+    static const std::string KEY_AIRBRAKE_DOWN;
+    static const std::string KEY_AIRBRAKE_ROTATE_LEFT;
+    static const std::string KEY_AIRBRAKE_ROTATE_RIGHT;
+    static const std::string KEY_AIRBRAKE_FORWARD;
+    static const std::string KEY_AIRBRAKE_BACK;
+    static const std::string KEY_AIRBRAKE_SPEED;
+    static const std::string KEY_AIRBRAKE_FREEZE_TIME;
+    static const std::string KEY_AIRBRAKE_HELP;
+    static const std::string KEY_AIRBRAKE_SPACE;
+    static const std::string KEY_AIRBRAKE_MOUSE_CONTROL;
 
-	static const std::string KEY_OBJECTPLACER_UP;
-	static const std::string KEY_OBJECTPLACER_DOWN;
-	static const std::string KEY_OBJECTPLACER_FORWARD;
-	static const std::string KEY_OBJECTPLACER_BACK;
-	static const std::string KEY_OBJECTPLACER_ROTATE_LEFT;
-	static const std::string KEY_OBJECTPLACER_ROTATE_RIGHT;
-	static const std::string KEY_OBJECTPLACER_SPEED_CYCLE;
-	static const std::string KEY_OBJECTPLACER_SPEED_UP;
-	static const std::string KEY_OBJECTPLACER_SPEED_DOWN;
-	static const std::string KEY_OBJECTPLACER_FREEZE_TIME;
-	static const std::string KEY_OBJECTPLACER_FREEZE_POSITION;
-	static const std::string KEY_OBJECTPLACER_HELP;
-	static const std::string KeyConfig::KEY_OBJECTPLACER_ALT_MOVE;
+    static const std::string KEY_OBJECTPLACER_UP;
+    static const std::string KEY_OBJECTPLACER_DOWN;
+    static const std::string KEY_OBJECTPLACER_FORWARD;
+    static const std::string KEY_OBJECTPLACER_BACK;
+    static const std::string KEY_OBJECTPLACER_ROTATE_LEFT;
+    static const std::string KEY_OBJECTPLACER_ROTATE_RIGHT;
+    static const std::string KEY_OBJECTPLACER_SPEED_CYCLE;
+    static const std::string KEY_OBJECTPLACER_SPEED_UP;
+    static const std::string KEY_OBJECTPLACER_SPEED_DOWN;
+    static const std::string KEY_OBJECTPLACER_FREEZE_TIME;
+    static const std::string KEY_OBJECTPLACER_FREEZE_POSITION;
+    static const std::string KEY_OBJECTPLACER_HELP;
+    static const std::string KeyConfig::KEY_OBJECTPLACER_ALT_MOVE;
 
-	static const std::string KEY_HOT_1;
-	static const std::string KEY_HOT_2;
-	static const std::string KEY_HOT_3;
-	static const std::string KEY_HOT_4;
-	static const std::string KEY_HOT_5;
-	static const std::string KEY_HOT_6;
-	static const std::string KEY_HOT_7;
-	static const std::string KEY_HOT_8;
-	static const std::string KEY_HOT_9;
+    static const std::string KEY_HOT_1;
+    static const std::string KEY_HOT_2;
+    static const std::string KEY_HOT_3;
+    static const std::string KEY_HOT_4;
+    static const std::string KEY_HOT_5;
+    static const std::string KEY_HOT_6;
+    static const std::string KEY_HOT_7;
+    static const std::string KEY_HOT_8;
+    static const std::string KEY_HOT_9;
 
-	inline KeyConfig(int code){
-		this->keyCode = code;
-	};
+    int keyCode;         // Windows VK code
+    int gameButton;      // Game eButton code
+    bool modCtrl;
+    bool modAlt; 
+    bool modShift;
+    bool useGameButton;  // 标识是使用VK还是游戏按键
 
-	int keyCode;
-	bool modCtrl = false;
-	bool modAlt = false;
-	bool modShift = false;
+    inline KeyConfig(int code) {
+        this->keyCode = code;
+        this->gameButton = -1;
+        this->useGameButton = false;
+    }
+
+    inline KeyConfig(int code, int button) {
+        this->keyCode = code;
+        this->gameButton = button;
+        this->useGameButton = true;
+    }
 };
 
 /**A class to hold the current key bindings.*/
