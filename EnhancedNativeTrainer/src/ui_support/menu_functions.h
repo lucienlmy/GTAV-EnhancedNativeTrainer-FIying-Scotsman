@@ -1298,13 +1298,14 @@ bool draw_generic_menu(MenuParameters<T> params) {
 					if (TrainerControlScrollingIndex == 0) {
 						currentSelectionIndex++;
 						if (currentSelectionIndex >= totalItems || (currentSelectionIndex >= lineStartPosition + itemsOnThisLine)) {
-							// 直接跳转到第一项,不要过渡动画
+							// 直接跳转到当前页第一项,不要过渡动画 
 							currentSelectionIndex = lineStartPosition;
-							params.currentActiveLine = 75.0f;  // 直接设置为第一行位置
+							params.currentActiveLine = 75.0f;  // 直接设置为该页第一行位置
 							params.isCursorAnimating = false;
 						} else {
-							// 正常移动时才使用动画
-							params.targetActiveLine = 75.0f + (currentSelectionIndex * 39.0f); 
+							// 正常移动时使用动画,需要考虑当前页面偏移
+							int positionOnPage = currentSelectionIndex - lineStartPosition;  // 获取在当前页中的位置
+							params.targetActiveLine = 75.0f + (positionOnPage * 39.0f); 
 							params.isCursorAnimating = true;
 						}
 					}
@@ -1331,20 +1332,21 @@ bool draw_generic_menu(MenuParameters<T> params) {
 					}
 					waitTime = 10; // Set wait time to 150ms to prevent repeated triggers
 				}
-				// 修改Up按键处理部分
-				else if(bUp) {// If the user presses the Up key
+				// 修改Up按键处理部分 
+				else if(bUp) {
 					menu_beep();
 					if (TrainerControlScrollingIndex == 0) {
 						currentSelectionIndex--;
 						if (currentSelectionIndex < 0 || (currentSelectionIndex < lineStartPosition)) {
-							// 直接跳转到最后一项,不要过渡动画
+							// 直接跳转到当前页最后一项,不要过渡动画
 							currentSelectionIndex = lineStartPosition + itemsOnThisLine - 1;
-							params.currentActiveLine = 75.0f + ((itemsOnThisLine-1) * 39.0f); // 直接设置为最后一行位置
+							params.currentActiveLine = 75.0f + ((itemsOnThisLine-1) * 39.0f); 
 							params.isCursorAnimating = false;
 						} else {
-							// 正常移动时才使用动画
-							params.targetActiveLine = 75.0f + (currentSelectionIndex * 39.0f);
-							params.isCursorAnimating = true;
+							// 正常移动时使用动画,需要考虑当前页面偏移
+							int positionOnPage = currentSelectionIndex - lineStartPosition;  // 获取在当前页中的位置
+							params.targetActiveLine = 75.0f + (positionOnPage * 39.0f);
+							params.isCursorAnimating = true; 
 						}
 					}
 					else
