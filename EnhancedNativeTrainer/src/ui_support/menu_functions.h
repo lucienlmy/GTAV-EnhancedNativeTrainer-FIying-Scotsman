@@ -513,6 +513,12 @@ public:
 	bool has_menu_selection_ptr() {
 		return menuSelectionPtr != 0;
 	}
+
+	// 添加光标动画状态
+	float currentActiveLine = 0.0f;   // 当前活动行
+	float targetActiveLine = 0.0f;    // 目标活动行
+	float cursorAnimSpeed = 0.25f;    // 光标动画速度
+	bool isCursorAnimating = false;   // 是否正在动画中
 };
 
 static const float TEXT_HEIGHT_NORMAL = 17.0f;
@@ -642,7 +648,11 @@ inline void draw_menu_header_line(std::string caption, float lineWidth, float li
 }
 
 template<typename T>
-void draw_menu_item_line(MenuItem<T>* item, float lineWidth, float lineHeight, float lineTop, float lineLeft, float textLeft, bool active, bool rescaleText) {
+void draw_menu_item_line(MenuItem<T>* item, float lineWidth, float lineHeight, float lineTop, float lineLeft, float textLeft, bool active, bool rescaleText,
+                        float *currentActiveLine = nullptr, // 添加动画参数
+                        float targetActiveLine = 0.0f,
+                        bool *isAnimating = nullptr,
+                        float animSpeed = 0.25f) {
 	float text_scale = 0.35;
 	bool outline = false;
 	bool dropShadow = false;
@@ -703,14 +713,40 @@ void draw_menu_item_line(MenuItem<T>* item, float lineWidth, float lineHeight, f
 	UI::_DRAW_TEXT(textLeftScaled, textY);
 
 	// rect
-	if (active) {
-		draw_rect(lineLeftScaled, lineTopScaled, lineWidthScaled, lineHeightScaled,
-			ENTColor::colsMenu[5].rgba[0], ENTColor::colsMenu[5].rgba[1], ENTColor::colsMenu[5].rgba[2], ENTColor::colsMenu[5].rgba[3]);
-	}
-	else {
-		draw_rect(lineLeftScaled, lineTopScaled, lineWidthScaled, lineHeightScaled,
-			ENTColor::colsMenu[3].rgba[0], ENTColor::colsMenu[3].rgba[1], ENTColor::colsMenu[3].rgba[2], ENTColor::colsMenu[3].rgba[3]);
-	}
+	if(active) {
+        if(currentActiveLine && isAnimating && *isAnimating) {
+            // 使用线性插值计算当前光标位置
+            *currentActiveLine += (targetActiveLine - *currentActiveLine) * animSpeed;
+            
+            // 检查是否接近目标位置
+            if(abs(*currentActiveLine - targetActiveLine) < 0.01f) {
+                *currentActiveLine = targetActiveLine;
+                *isAnimating = false;
+            }
+            
+            // 在当前插值位置绘制光标背景
+            draw_rect(lineLeftScaled, *currentActiveLine / (float)screen_h, 
+                     lineWidthScaled, lineHeightScaled,
+                     ENTColor::colsMenu[5].rgba[0], 
+                     ENTColor::colsMenu[5].rgba[1],
+                     ENTColor::colsMenu[5].rgba[2], 
+                     ENTColor::colsMenu[5].rgba[3]);
+        } else {
+            // 直接绘制在目标位置
+            draw_rect(lineLeftScaled, lineTopScaled, lineWidthScaled, lineHeightScaled,
+                     ENTColor::colsMenu[5].rgba[0],
+                     ENTColor::colsMenu[5].rgba[1], 
+                     ENTColor::colsMenu[5].rgba[2],
+                     ENTColor::colsMenu[5].rgba[3]); 
+        }
+    } else {
+        // 非活动项保持不变
+        draw_rect(lineLeftScaled, lineTopScaled, lineWidthScaled, lineHeightScaled,
+                 ENTColor::colsMenu[3].rgba[0],
+                 ENTColor::colsMenu[3].rgba[1],
+                 ENTColor::colsMenu[3].rgba[2], 
+                 ENTColor::colsMenu[3].rgba[3]);
+    }
 
 	if (ToggleMenuItem<T>* toggleItem = dynamic_cast<ToggleMenuItem<T>*>(item)) {
 		UI::SET_TEXT_FONT(fontItem);
@@ -1193,7 +1229,13 @@ bool draw_generic_menu(MenuParameters<T> params) {
 				float lineLeft = 35.0f;
 				float textOffset = 10.0f;
 
-				draw_menu_item_line(params.items[lineStartPosition + i], lineWidth, lineHeight, lineTop, lineLeft, textOffset, i == positionOnThisLine, false);
+				draw_menu_item_line(params.items[lineStartPosition + i], 
+					lineWidth, lineHeight, lineTop, lineLeft, textOffset, 
+					i == positionOnThisLine, false,
+					&params.currentActiveLine,  // 传入动画参数
+					params.targetActiveLine,
+					&params.isCursorAnimating, 
+					params.cursorAnimSpeed);
 
 				if (i == positionOnThisLine) {
 					activeLineY = lineTop;
@@ -1250,13 +1292,20 @@ bool draw_generic_menu(MenuParameters<T> params) {
 				break;
 			}
 			else{
-				if(bDown){// If the user presses the Down key
+				// 修改Down按键处理部分
+				if(bDown) {
 					menu_beep();
-					if (TrainerControlScrollingIndex == 0)
-					{
+					if (TrainerControlScrollingIndex == 0) {
 						currentSelectionIndex++;
 						if (currentSelectionIndex >= totalItems || (currentSelectionIndex >= lineStartPosition + itemsOnThisLine)) {
+							// 直接跳转到第一项,不要过渡动画
 							currentSelectionIndex = lineStartPosition;
+							params.currentActiveLine = 75.0f;  // 直接设置为第一行位置
+							params.isCursorAnimating = false;
+						} else {
+							// 正常移动时才使用动画
+							params.targetActiveLine = 75.0f + (currentSelectionIndex * 39.0f); 
+							params.isCursorAnimating = true;
 						}
 					}
 					else
@@ -1282,13 +1331,20 @@ bool draw_generic_menu(MenuParameters<T> params) {
 					}
 					waitTime = 10; // Set wait time to 150ms to prevent repeated triggers
 				}
-				else if(bUp){// If the user presses the Up key
+				// 修改Up按键处理部分
+				else if(bUp) {// If the user presses the Up key
 					menu_beep();
-					if (TrainerControlScrollingIndex == 0)
-					{
+					if (TrainerControlScrollingIndex == 0) {
 						currentSelectionIndex--;
 						if (currentSelectionIndex < 0 || (currentSelectionIndex < lineStartPosition)) {
+							// 直接跳转到最后一项,不要过渡动画
 							currentSelectionIndex = lineStartPosition + itemsOnThisLine - 1;
+							params.currentActiveLine = 75.0f + ((itemsOnThisLine-1) * 39.0f); // 直接设置为最后一行位置
+							params.isCursorAnimating = false;
+						} else {
+							// 正常移动时才使用动画
+							params.targetActiveLine = 75.0f + (currentSelectionIndex * 39.0f);
+							params.isCursorAnimating = true;
 						}
 					}
 					else
