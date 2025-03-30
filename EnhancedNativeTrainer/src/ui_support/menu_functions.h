@@ -1303,7 +1303,18 @@ bool draw_generic_menu(MenuParameters<T> params) {
 				menu_beep();
 				waitTime = 2;//返回键按下后的等待时间
 				result = false;
-				break;
+				//break;
+				// 触发退出回调
+				if (params.onExit) {
+					params.onExit(result);
+				}
+				
+				// 重置选项位置
+				if (params.menuSelectionPtr) {
+					*params.menuSelectionPtr = 0;
+				}
+				
+				return false;  // 返回false让上层处理
 			}
 			else{
 				// 修改Down按键处理部分
