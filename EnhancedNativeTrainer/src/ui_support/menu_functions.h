@@ -1137,14 +1137,28 @@ bool draw_generic_menu(MenuParameters<T> params) {
 	if (params.has_menu_selection_ptr()) {
 		if (params.get_menu_selection_index() >= totalItems) {
 			params.set_menu_selection_index(0);
+			currentSelectionIndex = 0;
+			params.currentActiveLine = 75.0f; // 直接设置初始位置
 		}
 		else if (params.get_menu_selection_index() < 0) {
 			params.set_menu_selection_index(0);
+			currentSelectionIndex = 0; 
+			params.currentActiveLine = 75.0f; // 直接设置初始位置
 		}
-		currentSelectionIndex = params.get_menu_selection_index();
+		else {
+			currentSelectionIndex = params.get_menu_selection_index();
+			// 计算当前页面偏移
+			int positionOnThisLine = currentSelectionIndex % itemsPerLine;
+			int lineStartPosition = currentSelectionIndex - positionOnThisLine;
+			// 设置正确的初始光标位置
+			params.currentActiveLine = 75.0f + ((currentSelectionIndex - lineStartPosition) * 39.0f);
+		}
+		params.isCursorAnimating = false; // 初始化时禁用动画
 	}
 	else {
 		currentSelectionIndex = 0;
+		params.currentActiveLine = 75.0f;
+		params.isCursorAnimating = false;
 	}
 
 	if (params.onHighlight != NULL) {
