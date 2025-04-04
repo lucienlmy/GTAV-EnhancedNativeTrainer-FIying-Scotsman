@@ -1298,9 +1298,7 @@ void update_features(){
 					PLAYER::SET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID(), 1, 0);
 					PLAYER::SET_PLAYER_WANTED_LEVEL_NOW(PLAYER::PLAYER_ID(), 0);
 				}
-
-				//if (PED::IS_PED_SHOOTING(playerPed)) we_have_troubles = true;
-
+				
 				if (we_have_troubles == false) {
 					GAMEPLAY::CLEAR_AREA_OF_COPS(ENTITY::GET_ENTITY_COORDS(playerPed, true).x, ENTITY::GET_ENTITY_COORDS(playerPed, true).y, ENTITY::GET_ENTITY_COORDS(playerPed, true).z, 20, 0);
 					PLAYER::SET_POLICE_IGNORE_PLAYER(PLAYER::PLAYER_ID(), true);
@@ -1311,7 +1309,7 @@ void update_features(){
 					UI::SHOW_HUD_COMPONENT_THIS_FRAME(1);
 				}
 			}
-			else if (PLAYER::GET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID()) < 2) {
+			else if (PLAYER::GET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID()) < 2 && we_have_troubles == false) { // leaving the house
 				PLAYER::SET_MAX_WANTED_LEVEL(5);
 				PLAYER::SET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID(), 0, 0);
 				PLAYER::SET_PLAYER_WANTED_LEVEL_NOW(PLAYER::PLAYER_ID(), 0);
@@ -1325,6 +1323,8 @@ void update_features(){
 			}
 			iaminside = false;
 		}
+		if (iaminside == false && PLAYER::GET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID()) > 0) we_have_troubles = true;
+		if (we_have_troubles == true && PLAYER::GET_PLAYER_WANTED_LEVEL(PLAYER::PLAYER_ID()) == 0) we_have_troubles = false;
 	}
 	
 	// Max Wanted Level
