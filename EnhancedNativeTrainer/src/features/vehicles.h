@@ -1105,8 +1105,8 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("JESTER5"), "lgm_dlc_2024_2", "jester5" },
 	{ RAGE_JOAAT("DUSTER2"), "elt_dlc_2024_2", "duster2" },
 	//Summer 2025 - Money Fronts
-	{ RAGE_JOAAT("POLICEB2"), "candc_dlc_2025_1 ", "policeb2" },
-	{ RAGE_JOAAT("STOCKADE4"), "candc_dlc_2025_1 ", "stockade4" },
+	{ RAGE_JOAAT("POLICEB2"), "candc_dlc_2025_1", "policeb2" },
+	{ RAGE_JOAAT("STOCKADE4"), "candc_dlc_2025_1", "stockade4" },
 	{ RAGE_JOAAT("CHEETAH3"), "lgm_dlc_2025_1", "cheetah3" },
 	{ RAGE_JOAAT("EVERON3"), "lgm_dlc_2025_1", "everon3" },
 	{ RAGE_JOAAT("RAPIDGT4"), "lgm_dlc_2025_1", "rapidgt4" },
@@ -1117,7 +1117,8 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("L352"), "sssa_dlc_2025_1", "l352" },
 	{ RAGE_JOAAT("MINIMUS"), "sssa_dlc_2025_1", "minimus" },
 	{ RAGE_JOAAT("TAMPA4"), "sssa_dlc_2025_1", "tampa4" },
-	{ RAGE_JOAAT("WOODLANDER"), "sssa_dlc_2025_1", "woodlander" }
+	{ RAGE_JOAAT("WOODLANDER"), "sssa_dlc_2025_1", "woodlander" },
+	{ RAGE_JOAAT("MAVERICK2"), "elt_default", "maverick" },
 };
 
 /***
