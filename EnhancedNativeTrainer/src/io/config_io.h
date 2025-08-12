@@ -18,38 +18,40 @@ https://github.com/gtav-ent/GTAV-EnhancedNativeTrainer
 
 #include "keyboard.h"
 
-class KeyConfig {
-public:
-    static const std::string KEY_TOGGLE_MAIN_MENU;
-    static const std::string KEY_TOGGLE_AIRBRAKE;
+class KeyConfig{
+	public:
 
-    static const std::string KEY_MENU_UP;
-    static const std::string KEY_MENU_DOWN;
-    static const std::string KEY_MENU_LEFT;
-    static const std::string KEY_MENU_RIGHT;
-    static const std::string KEY_MENU_SELECT;
-    static const std::string KEY_MENU_BACK;
+	static const std::string KEY_TOGGLE_MAIN_MENU;
+	static const std::string KEY_TOGGLE_AIRBRAKE;
 
-    static const std::string KEY_VEH_BOOST;
-    static const std::string KEY_VEH_STOP;
-    static const std::string KEY_VEH_ROCKETS;
-    static const std::string KEY_VEH_LEFTBLINK;
-    static const std::string KEY_VEH_RIGHTBLINK;
-    static const std::string KEY_VEH_EMERGENCYBLINK;
-    static const std::string KEY_VEH_STARTREFUELING;
-    static const std::string KEY_VEH_STOPREFUELING;
+	static const std::string KEY_MENU_UP;
+	static const std::string KEY_MENU_DOWN;
+	static const std::string KEY_MENU_LEFT;
+	static const std::string KEY_MENU_RIGHT;
+	static const std::string KEY_MENU_SELECT;
+	static const std::string KEY_MENU_BACK;
 
-    static const std::string KEY_AIRBRAKE_UP;
-    static const std::string KEY_AIRBRAKE_DOWN;
-    static const std::string KEY_AIRBRAKE_ROTATE_LEFT;
-    static const std::string KEY_AIRBRAKE_ROTATE_RIGHT;
-    static const std::string KEY_AIRBRAKE_FORWARD;
-    static const std::string KEY_AIRBRAKE_BACK;
-    static const std::string KEY_AIRBRAKE_SPEED;
-    static const std::string KEY_AIRBRAKE_FREEZE_TIME;
-    static const std::string KEY_AIRBRAKE_HELP;
-    static const std::string KEY_AIRBRAKE_SPACE;
-    static const std::string KEY_AIRBRAKE_MOUSE_CONTROL;
+	static const std::string KEY_VEH_BOOST;
+	static const std::string KEY_VEH_STOP;
+	static const std::string KEY_VEH_ROCKETS;
+	static const std::string KEY_VEH_LEFTBLINK;
+	static const std::string KEY_VEH_RIGHTBLINK;
+	static const std::string KEY_VEH_EMERGENCYBLINK;
+	static const std::string KEY_VEH_STARTREFUELING;
+	static const std::string KEY_VEH_STOPREFUELING;
+	static const std::string KEY_VEH_CANREFUELING;
+	
+	static const std::string KEY_AIRBRAKE_UP;
+	static const std::string KEY_AIRBRAKE_DOWN;
+	static const std::string KEY_AIRBRAKE_ROTATE_LEFT;
+	static const std::string KEY_AIRBRAKE_ROTATE_RIGHT;
+	static const std::string KEY_AIRBRAKE_FORWARD;
+	static const std::string KEY_AIRBRAKE_BACK;
+	static const std::string KEY_AIRBRAKE_SPEED;
+	static const std::string KEY_AIRBRAKE_FREEZE_TIME;
+	static const std::string KEY_AIRBRAKE_HELP;
+	static const std::string KEY_AIRBRAKE_SPACE;
+	static const std::string KEY_AIRBRAKE_MOUSE_CONTROL;
 
     static const std::string KEY_OBJECTPLACER_UP;
     static const std::string KEY_OBJECTPLACER_DOWN;
