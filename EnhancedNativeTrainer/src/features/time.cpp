@@ -57,7 +57,7 @@ int timeSinceAimingBegan = 0;
 
 bool weHaveChangedTimeScale;
 
-float quadratic_time_transition(float start, float end, float progress){
+float quadratic_time_transition(float start, float end, float progress) {
 	//The quadratic stuff
 	float t = 1 - progress;
 	t = 1 - (t * t);
@@ -67,40 +67,40 @@ float quadratic_time_transition(float start, float end, float progress){
 	return (start + (difference * t));
 }
 
-bool onconfirm_time_set_menu(MenuItem<int> choice){
-	switch(choice.value){
-		case 0:
-			// 0000
-			movetime_set(0, 0);
-			break;
-		case 1:
-			// 0500
-			movetime_set(5, 0);
-			break;
-		case 2:
-			// 0600
-			movetime_set(6, 0);
-			break;
-		case 3:
-			// 0800
-			movetime_set(8, 0);
-			break;
-		case 4:
-			// 1200
-			movetime_set(12, 0);
-			break;
-		case 5:
-			// 1600
-			movetime_set(16, 0);
-			break;
-		case 6:
-			// 1830
-			movetime_set(18, 30);
-			break;
-		case 7:
-			// 2100
-			movetime_set(21, 0);
-			break;
+bool onconfirm_time_set_menu(MenuItem<int> choice) {
+	switch (choice.value) {
+	case 0:
+		// 0000
+		movetime_set(0, 0);
+		break;
+	case 1:
+		// 0500
+		movetime_set(5, 0);
+		break;
+	case 2:
+		// 0600
+		movetime_set(6, 0);
+		break;
+	case 3:
+		// 0800
+		movetime_set(8, 0);
+		break;
+	case 4:
+		// 1200
+		movetime_set(12, 0);
+		break;
+	case 5:
+		// 1600
+		movetime_set(16, 0);
+		break;
+	case 6:
+		// 1830
+		movetime_set(18, 30);
+		break;
+	case 7:
+		// 2100
+		movetime_set(21, 0);
+		break;
 	}
 
 	return false;
@@ -128,11 +128,11 @@ void onchange_aiming_speed_callback(int value, SelectFromListMenuItem* source) {
 	set_status_text(ss.str());
 }
 
-void onchange_time_flow_rate_callback(int value, SelectFromListMenuItem *source) {
+void onchange_time_flow_rate_callback(int value, SelectFromListMenuItem* source) {
 	timeFlowRateIndex = value, timeFlowRateChanged = true, timeFlowRateLocked = false;
 }
 
-void onchange_hotkey_flow_rate_callback(int value, SelectFromListMenuItem *source) {
+void onchange_hotkey_flow_rate_callback(int value, SelectFromListMenuItem* source) {
 	HotkeyFlowRateIndex = value, HotkeyFlowRateChanged = true, HotkeyFlowRateLocked = false;
 }
 
@@ -181,18 +181,18 @@ bool flowtime_menu_interrupt() {
 void all_time_flow_rate() {
 	do {
 		requireRefreshOfTime = false;
-		std::vector<MenuItem<int> *> menuItems;
-		MenuItem<int> *item;
+		std::vector<MenuItem<int>*> menuItems;
+		MenuItem<int>* item;
 		int index = 0;
 
-		ToggleMenuItem<int> *togItem = new ToggleMenuItem<int>();
+		ToggleMenuItem<int>* togItem = new ToggleMenuItem<int>();
 		togItem->caption = "Sync With System";
 		togItem->value = 0;
 		togItem->toggleValue = &featureTimeSynced;
 		togItem->toggleValueUpdated = NULL;
 		menuItems.push_back(togItem);
 
-		SelectFromListMenuItem *listItem = new SelectFromListMenuItem(TIME_SPEED_CAPTIONS, onchange_hotkey_flow_rate_callback);
+		SelectFromListMenuItem* listItem = new SelectFromListMenuItem(TIME_SPEED_CAPTIONS, onchange_hotkey_flow_rate_callback);
 		listItem->wrap = false;
 		listItem->caption = "Global Game Speed";
 		listItem->value = HotkeyFlowRateIndex;
@@ -239,15 +239,14 @@ void all_time_flow_rate() {
 		menuItems.push_back(togItem);
 
 		draw_generic_menu<int>(menuItems, nullptr, "Time Settings", onconfirm_time_flowrate_menu, nullptr, nullptr, flowtime_menu_interrupt);
-	}
-	while (requireRefreshOfTime);
+	} while (requireRefreshOfTime);
 }
 
-void process_time_set_menu(){
-	std::vector<MenuItem<int> *> menuItems;
+void process_time_set_menu() {
+	std::vector<MenuItem<int>*> menuItems;
 	int index = 0;
 
-	MenuItem<int> *item = new MenuItem<int>();
+	MenuItem<int>* item = new MenuItem<int>();
 	item->caption = "Midnight";
 	item->value = index++;
 	item->isLeaf = true;
@@ -298,51 +297,51 @@ void process_time_set_menu(){
 	draw_generic_menu<int>(menuItems, nullptr, "Set Time To ", onconfirm_time_set_menu, nullptr, nullptr, nullptr);
 }
 
-bool onconfirm_time_menu(MenuItem<int> choice){
-	switch(activeLineIndexTime){
-		case 0:
-			process_time_set_menu();
-			break;
-		case 1:
-			movetime_hour_forward();
-			break;
-		case 2:
-			movetime_hour_backward();
-			break;
-		case 3:
-			movetime_fivemin_forward();
-			break;
-		case 4:
-			movetime_fivemin_backward();
-			break;
-		case 5:
-			movetime_day_forward();
-			break;
-		case 6:
-			movetime_day_backward();
-			break;
-		case 7:
-			set_date();
-			break;
-		case 8:
-			set_time();
-			break;
-		case 9:
-			all_time_flow_rate();
-			break;
+bool onconfirm_time_menu(MenuItem<int> choice) {
+	switch (activeLineIndexTime) {
+	case 0:
+		process_time_set_menu();
+		break;
+	case 1:
+		movetime_hour_forward();
+		break;
+	case 2:
+		movetime_hour_backward();
+		break;
+	case 3:
+		movetime_fivemin_forward();
+		break;
+	case 4:
+		movetime_fivemin_backward();
+		break;
+	case 5:
+		movetime_day_forward();
+		break;
+	case 6:
+		movetime_day_backward();
+		break;
+	case 7:
+		set_date();
+		break;
+	case 8:
+		set_time();
+		break;
+	case 9:
+		all_time_flow_rate();
+		break;
 	}
 	return false;
 }
 
-void process_time_menu(){
-	const std::string caption = "时间选项";
+void process_time_menu() {
+	const std::string caption = "Time Options";
 
 	std::vector<MenuItem<int>*> menuItems;
 
 	int index = 0;
 
-	MenuItem<int> *item = new MenuItem<int>();
-	item->caption = "预设时间";
+	MenuItem<int>* item = new MenuItem<int>();
+	item->caption = "Set Time to Preset";
 	item->value = -1;
 	item->isLeaf = false;
 	menuItems.insert(menuItems.begin(), item);
@@ -382,7 +381,7 @@ void process_time_menu(){
 	item->value = index++;
 	item->isLeaf = true;
 	menuItems.push_back(item);
-	
+
 	item = new MenuItem<int>();
 	item->caption = "Set Date (DD/MM/YYYY)";
 	item->value = index++;
@@ -404,7 +403,7 @@ void process_time_menu(){
 	draw_generic_menu<int>(menuItems, &activeLineIndexTime, caption, onconfirm_time_menu, nullptr, nullptr, nullptr);
 }
 
-void reset_time_globals(){
+void reset_time_globals() {
 	featureTimeSynced = false;
 	timeFlowRateChanged = true;
 	HotkeyFlowRateChanged = true;
@@ -414,18 +413,18 @@ void reset_time_globals(){
 
 	timeSpeedIndexWhileAiming = DEFAULT_TIME_SPEED;
 	timeSpeedIndex = DEFAULT_TIME_SPEED;
-	timeFlowRateIndex = DEFAULT_TIME_FLOW_RATE; 
+	timeFlowRateIndex = DEFAULT_TIME_FLOW_RATE;
 	HotkeyFlowRateIndex = DEFAULT_HOTKEY_FLOW_RATE;
 }
 
-void add_time_feature_enablements(std::vector<FeatureEnabledLocalDefinition>* results){
-	results->push_back(FeatureEnabledLocalDefinition{"featureTimeSynced", &featureTimeSynced});
-	results->push_back(FeatureEnabledLocalDefinition{"featureShowtime", &featureShowtime});
-	results->push_back(FeatureEnabledLocalDefinition{"featurehotkeytime", &featurehotkeytime});
-	results->push_back(FeatureEnabledLocalDefinition{"featureSpeedAimInVeh", &featureSpeedAimInVeh});
+void add_time_feature_enablements(std::vector<FeatureEnabledLocalDefinition>* results) {
+	results->push_back(FeatureEnabledLocalDefinition{ "featureTimeSynced", &featureTimeSynced });
+	results->push_back(FeatureEnabledLocalDefinition{ "featureShowtime", &featureShowtime });
+	results->push_back(FeatureEnabledLocalDefinition{ "featurehotkeytime", &featurehotkeytime });
+	results->push_back(FeatureEnabledLocalDefinition{ "featureSpeedAimInVeh", &featureSpeedAimInVeh });
 }
 
-void movetime_day_forward(){
+void movetime_day_forward() {
 	/*
 	bool timeWasPaused = featureTimePaused;
 	TIME::PAUSE_CLOCK(true);
@@ -439,7 +438,7 @@ void movetime_day_forward(){
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 
 	bool leapYear = false;
-	if(calYear % 4 == 0){
+	if (calYear % 4 == 0) {
 		leapYear = true;
 	}
 
@@ -454,20 +453,20 @@ void movetime_day_forward(){
 	set_status_text(ss2.str());
 	*/
 
-	if((calDay == 27 && calMon == 2 && !leapYear) ||
+	if ((calDay == 27 && calMon == 2 && !leapYear) ||
 		(calDay == 28 && calMon == 2 && leapYear) ||
-	   (calDay == 30 && (calMon == 4 || calMon == 6 || calMon == 9 || calMon == 11)) ||
-	   (calDay == 31)){
+		(calDay == 30 && (calMon == 4 || calMon == 6 || calMon == 9 || calMon == 11)) ||
+		(calDay == 31)) {
 		calDay = 1;
-		if(calMon == 12){
+		if (calMon == 12) {
 			calMon = 1;
 			calYear++;
 		}
-		else{
+		else {
 			calMon++;
 		}
 	}
-	else{
+	else {
 		calDay++;
 	}
 
@@ -486,7 +485,7 @@ void movetime_day_forward(){
 	//TIME::PAUSE_CLOCK(timeWasPaused);
 }
 
-void movetime_day_backward(){
+void movetime_day_backward() {
 	int calDay = TIME::GET_CLOCK_DAY_OF_MONTH();
 	int calMon = TIME::GET_CLOCK_MONTH();
 	int calYear = TIME::GET_CLOCK_YEAR();
@@ -495,31 +494,31 @@ void movetime_day_backward(){
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 
 	bool leapYear = false;
-	if(calYear % 4 == 0){
+	if (calYear % 4 == 0) {
 		leapYear = true;
 	}
 
-	if(calDay != 1){
+	if (calDay != 1) {
 		calDay--;
 	}
-	else if(calMon == 1){
+	else if (calMon == 1) {
 		calDay = 31;
 		calMon = 12;
 		calYear--;
 	}
-	else{
-		if(calMon == 5 || calMon == 7 || calMon == 10 || calMon == 12){
+	else {
+		if (calMon == 5 || calMon == 7 || calMon == 10 || calMon == 12) {
 			calDay = 30;
 		}
-		if(calMon == 3){
-			if(leapYear){
+		if (calMon == 3) {
+			if (leapYear) {
 				calDay = 29;
 			}
-			else{
+			else {
 				calDay = 28;
 			}
 		}
-		else{
+		else {
 			calDay = 31;
 		}
 		calMon--;
@@ -624,11 +623,11 @@ void set_time() {
 	}
 }
 
-void movetime_hour_forward(){
+void movetime_hour_forward() {
 	int gameHour = TIME::GET_CLOCK_HOURS();
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 	gameHour++;
-	if(gameHour == 24){
+	if (gameHour == 24) {
 		movetime_day_forward();
 		gameHour = 00;
 	}
@@ -638,11 +637,11 @@ void movetime_hour_forward(){
 	set_status_text(text);
 }
 
-void movetime_hour_backward(){
+void movetime_hour_backward() {
 	int gameHour = TIME::GET_CLOCK_HOURS();
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 	gameHour--;
-	if(gameHour == -1){
+	if (gameHour == -1) {
 		movetime_day_backward();
 		gameHour = 23;
 	}
@@ -652,20 +651,20 @@ void movetime_hour_backward(){
 	set_status_text(text);
 }
 
-void movetime_fivemin_forward(){
+void movetime_fivemin_forward() {
 	int gameHour = TIME::GET_CLOCK_HOURS();
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 
-	if(gameHour == 23 && gameMins > 54){
+	if (gameHour == 23 && gameMins > 54) {
 		movetime_day_forward();
 		gameHour = 0;
 		gameMins = (gameMins + (-55));
 	}
-	else if(gameMins > 54){
+	else if (gameMins > 54) {
 		gameHour++;
 		gameMins = gameMins + (-55);
 	}
-	else{
+	else {
 		gameMins = gameMins + 5;
 	}
 
@@ -675,20 +674,20 @@ void movetime_fivemin_forward(){
 	set_status_text(text);
 }
 
-void movetime_fivemin_backward(){
+void movetime_fivemin_backward() {
 	int gameHour = TIME::GET_CLOCK_HOURS();
 	int gameMins = TIME::GET_CLOCK_MINUTES();
 
-	if(gameHour == 0 && gameMins < 5){
+	if (gameHour == 0 && gameMins < 5) {
 		movetime_day_backward();
 		gameHour = 23;
 		gameMins = gameMins + 55;
 	}
-	else if(gameMins < 5){
+	else if (gameMins < 5) {
 		gameHour--;
 		gameMins = gameMins + 55;
 	}
-	else{
+	else {
 		gameMins = gameMins - 5;
 	}
 
@@ -698,7 +697,7 @@ void movetime_fivemin_backward(){
 	set_status_text(text);
 }
 
-void movetime_set(int hour, int minute){
+void movetime_set(int hour, int minute) {
 	TIME::SET_CLOCK_TIME(hour, minute, 0);
 	char text[32];
 	sprintf_s(text, "Time is now %02d:%02d", TIME::GET_CLOCK_HOURS(), TIME::GET_CLOCK_MINUTES());
@@ -711,34 +710,34 @@ void toggle_game_speed()
 	WAIT(100);
 }
 
-std::string get_day_of_game_week(){
+std::string get_day_of_game_week() {
 	int day = TIME::GET_CLOCK_DAY_OF_WEEK();
-	switch(day){
-		case 0:
-			return "Sun";
-		case 1:
-			return "Mon";
-		case 2:
-			return "Tue";
-		case 3:
-			return "Wed";
-		case 4:
-			return "Thu";
-		case 5:
-			return "Fri";
-		case 6:
-			return "Sat";
+	switch (day) {
+	case 0:
+		return "Sun";
+	case 1:
+		return "Mon";
+	case 2:
+		return "Tue";
+	case 3:
+		return "Wed";
+	case 4:
+		return "Thu";
+	case 5:
+		return "Fri";
+	case 6:
+		return "Sat";
 	}
 	return std::string();
 }
 
-void handle_generic_settings_time(std::vector<StringPairSettingDBRow>* settings){
-	for(int i = 0; i < settings->size(); i++){
+void handle_generic_settings_time(std::vector<StringPairSettingDBRow>* settings) {
+	for (int i = 0; i < settings->size(); i++) {
 		StringPairSettingDBRow setting = settings->at(i);
-		if(setting.name.compare("timeSpeedIndexWhileAiming") == 0){
+		if (setting.name.compare("timeSpeedIndexWhileAiming") == 0) {
 			timeSpeedIndexWhileAiming = stoi(setting.value);
 		}
-		else if(setting.name.compare("timeFlowRateIndex") == 0){
+		else if (setting.name.compare("timeFlowRateIndex") == 0) {
 			timeFlowRateIndex = stoi(setting.value);
 		}
 		else if (setting.name.compare("HotkeyFlowRateIndex") == 0) {
@@ -747,16 +746,16 @@ void handle_generic_settings_time(std::vector<StringPairSettingDBRow>* settings)
 	}
 }
 
-void add_time_generic_settings(std::vector<StringPairSettingDBRow>* results){
-	results->push_back(StringPairSettingDBRow{"timeSpeedIndexWhileAiming", std::to_string(timeSpeedIndexWhileAiming)});
-	results->push_back(StringPairSettingDBRow{"timeFlowRateIndex", std::to_string(timeFlowRateIndex)});
-	results->push_back(StringPairSettingDBRow{"HotkeyFlowRateIndex", std::to_string(HotkeyFlowRateIndex)});
+void add_time_generic_settings(std::vector<StringPairSettingDBRow>* results) {
+	results->push_back(StringPairSettingDBRow{ "timeSpeedIndexWhileAiming", std::to_string(timeSpeedIndexWhileAiming) });
+	results->push_back(StringPairSettingDBRow{ "timeFlowRateIndex", std::to_string(timeFlowRateIndex) });
+	results->push_back(StringPairSettingDBRow{ "HotkeyFlowRateIndex", std::to_string(HotkeyFlowRateIndex) });
 }
 
-void update_time_features(Player player){
+void update_time_features(Player player) {
 	// time sync
-	if(featureTimeSynced){
-		if(timeFlowRateIndex != DEFAULT_TIME_FLOW_RATE){
+	if (featureTimeSynced) {
+		if (timeFlowRateIndex != DEFAULT_TIME_FLOW_RATE) {
 			timeFlowRateIndex = DEFAULT_TIME_FLOW_RATE, timeFlowRateChanged = true;
 
 		}
@@ -766,26 +765,26 @@ void update_time_features(Player player){
 		localtime_s(&t, &now);
 		TIME::SET_CLOCK_TIME(t.tm_hour, t.tm_min, t.tm_sec);
 	}
-	
+
 	if ((PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), 0) && featureSpeedAimInVeh) || !featureSpeedAimInVeh) slow_aim = true;
 	if (!PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), 0) && featureSpeedAimInVeh) slow_aim = false;
 
 	// time flow rate
-	if(timeFlowRateChanged){
+	if (timeFlowRateChanged) {
 		timeFlowRateChanged = false;
 
-		if(timeFlowRateIndex == DEFAULT_TIME_FLOW_RATE){
+		if (timeFlowRateIndex == DEFAULT_TIME_FLOW_RATE) {
 			TIME::PAUSE_CLOCK(false);
 		}
-		else{
+		else {
 			TIME::PAUSE_CLOCK(true);
 		}
 		timeFactor = timeFlowRateIndex == 0 ? -1.0f : 1000.0f / TIME_FLOW_RATE_VALUES.at(timeFlowRateIndex);
 		SYSTEM::SETTIMERA(0);
 	}
-	if(timeFlowRateIndex != DEFAULT_TIME_FLOW_RATE){
+	if (timeFlowRateIndex != DEFAULT_TIME_FLOW_RATE) {
 		TIME::PAUSE_CLOCK(true);
-		if(timeFlowRateIndex > 0){
+		if (timeFlowRateIndex > 0) {
 			int hours, minutes, seconds = static_cast<int>(static_cast<float>(SYSTEM::TIMERA()) / timeFactor);
 			hours = seconds / 3600, seconds %= 3600;
 			minutes = seconds / 60, seconds %= 60;
@@ -794,22 +793,22 @@ void update_time_features(Player player){
 		}
 	}
 
-	if((is_in_airbrake_mode() && is_airbrake_frozen_time()) || (is_in_prop_placement_mode() && is_prop_placement_frozen_time())){
+	if ((is_in_airbrake_mode() && is_airbrake_frozen_time()) || (is_in_prop_placement_mode() && is_prop_placement_frozen_time())) {
 		GAMEPLAY::SET_TIME_SCALE(0.0f);
 		weHaveChangedTimeScale = true;
 	}
-	else if(CONTROLS::IS_CONTROL_PRESSED(0, 19) || PLAYER::IS_PLAYER_DEAD(PLAYER::PLAYER_ID())){
+	else if (CONTROLS::IS_CONTROL_PRESSED(0, 19) || PLAYER::IS_PLAYER_DEAD(PLAYER::PLAYER_ID())) {
 		//do nothing so the game chooses the speed for us
 	}
-	else if(is_hotkey_held_normal_speed()){
+	else if (is_hotkey_held_normal_speed()) {
 		GAMEPLAY::SET_TIME_SCALE(1.0f);
 		weHaveChangedTimeScale = true;
 	}
-	else if(is_hotkey_held_slow_mo()){
+	else if (is_hotkey_held_slow_mo()) {
 		GAMEPLAY::SET_TIME_SCALE(0.0f);
 		weHaveChangedTimeScale = true;
 	}
-	else if (is_hotkey_held_half_normal_speed()){
+	else if (is_hotkey_held_half_normal_speed()) {
 		GAMEPLAY::SET_TIME_SCALE(0.4f);
 		weHaveChangedTimeScale = true;
 	}
@@ -817,35 +816,36 @@ void update_time_features(Player player){
 		GAMEPLAY::SET_TIME_SCALE(TIME_SPEED_VALUES.at(HotkeyFlowRateIndex));
 		weHaveChangedTimeScale = true;
 	}
-	else if(PLAYER::IS_PLAYER_FREE_AIMING(player) && PLAYER::IS_PLAYER_CONTROL_ON(player) && slow_aim == true){
-		if(timeSinceAimingBegan == 0){
+	else if (PLAYER::IS_PLAYER_FREE_AIMING(player) && PLAYER::IS_PLAYER_CONTROL_ON(player) && slow_aim == true) {
+		if (timeSinceAimingBegan == 0) {
 			timeSinceAimingBegan = GetTickCount();
-		} else{ // this must fix a bug when the game stayed slow even when not aiming
+		}
+		else { // this must fix a bug when the game stayed slow even when not aiming
 			GAMEPLAY::SET_TIME_SCALE(1.0f);
 			weHaveChangedTimeScale = true;
 		}
 
-		if((GetTickCount() - timeSinceAimingBegan) < TIME_TO_SLOW_AIM){
+		if ((GetTickCount() - timeSinceAimingBegan) < TIME_TO_SLOW_AIM) {
 			float fullSpeedTime = weHaveChangedTimeScale ? TIME_SPEED_VALUES.at(timeSpeedIndex) : 1.0f;
 			float targetTime = TIME_SPEED_VALUES.at(timeSpeedIndexWhileAiming);
 
-			float progress = ((float) (GetTickCount() - timeSinceAimingBegan) / TIME_TO_SLOW_AIM);
+			float progress = ((float)(GetTickCount() - timeSinceAimingBegan) / TIME_TO_SLOW_AIM);
 
 			float rate = quadratic_time_transition(fullSpeedTime, targetTime, progress);
 
 			GAMEPLAY::SET_TIME_SCALE(rate);
 		}
-		else{
+		else {
 			GAMEPLAY::SET_TIME_SCALE(TIME_SPEED_VALUES.at(timeSpeedIndexWhileAiming));
 			weHaveChangedTimeScale = true;
 		}
 	}
-	else if(weHaveChangedTimeScale){
+	else if (weHaveChangedTimeScale) {
 		GAMEPLAY::SET_TIME_SCALE(1.0f);
 		weHaveChangedTimeScale = false;
 	}
 
-	if(timeSinceAimingBegan > 0 && !(PLAYER::IS_PLAYER_FREE_AIMING(player) && PLAYER::IS_PLAYER_CONTROL_ON(player))){
+	if (timeSinceAimingBegan > 0 && !(PLAYER::IS_PLAYER_FREE_AIMING(player) && PLAYER::IS_PLAYER_CONTROL_ON(player))) {
 		timeSinceAimingBegan = 0;
 	}
 
@@ -957,7 +957,7 @@ void update_time_features(Player player){
 		else UI::_ADD_TEXT_COMPONENT_SCALEFORM(seconds_to_show_char);
 		UI::_DRAW_TEXT(0.031, 0.185);
 		GRAPHICS::DRAW_RECT(0.0, 0.20, 0.10, 0.03, 10, 10, 10, 100);
-				
+
 		char day_to_show_char_modifiable[10];
 		char year_to_show_char_modifiable[10];
 		sprintf(day_to_show_char_modifiable, "%d", calDay);
