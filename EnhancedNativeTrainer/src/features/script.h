@@ -1,4 +1,4 @@
-﻿/*
+/*
 Some of this code began its life as a part of GTA V SCRIPT HOOK SDK.
 http://dev-c.com
 (C) Alexander Blade 2015
@@ -82,31 +82,31 @@ extern std::string MAP_STUFF;
 const std::vector<std::string> LIMP_IF_INJURED_CAPTIONS{ "OFF", "Mode 1", "Mode 2" }; //Limp If Injured
 
 //Ensures numbers are formatted with commas, not the locale option
-class comma_numpunct : public std::numpunct<char> {
-protected:
-	virtual char do_thousands_sep() const {
+class comma_numpunct: public std::numpunct<char>{
+	protected:
+	virtual char do_thousands_sep() const{
 		return ',';
 	}
 
-	virtual std::string do_grouping() const {
+	virtual std::string do_grouping() const{
 		return "\03";
 	}
 };
 
 // trim from start
-static inline std::string& ltrim(std::string& s) {
+static inline std::string &ltrim(std::string &s){
 	s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) { return !std::isspace(c); }));
 	return s;
 }
 
 // trim from end
-static inline std::string& rtrim(std::string& s) {
+static inline std::string &rtrim(std::string &s){
 	s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {	return !std::isspace(ch);}).base(), s.end());
 	return s;
 }
 
 // trim from both ends
-static inline std::string& trim(std::string& s) {
+static inline std::string &trim(std::string &s){
 	return ltrim(rtrim(s));
 }
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
 Some of this code began its life as a part of GTA V SCRIPT HOOK SDK.
 http://dev-c.com
 (C) Alexander Blade 2015
@@ -101,11 +101,11 @@ void reset_skin_globals()
 
 bool applyChosenSkin(std::string skinName)
 {
-	DWORD model = GAMEPLAY::GET_HASH_KEY((char*)skinName.c_str());
+	DWORD model = GAMEPLAY::GET_HASH_KEY((char *)skinName.c_str());
 	return applyChosenSkin(model);
 }
 
-bool applyChosenSkin(DWORD model)
+bool applyChosenSkin(DWORD model) 
 {
 	if (STREAMING::IS_MODEL_IN_CDIMAGE(model) && STREAMING::IS_MODEL_VALID(model))
 	{
@@ -257,7 +257,7 @@ void onexit_skinchanger_texture_menu(bool returnValue)
 
 void update_skin_features() {
 	// No Blood And No Bullet Holes
-	if (featurenoblood) PED::CLEAR_PED_BLOOD_DAMAGE(PLAYER::PLAYER_PED_ID());
+	if (featurenoblood) PED::CLEAR_PED_BLOOD_DAMAGE(PLAYER::PLAYER_PED_ID()); 
 
 	// Persistent Props
 	if (featurepersprops && ENTITY::IS_ENTITY_IN_WATER(PLAYER::PLAYER_PED_ID()) == 0/* && (PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 0) > -1 || PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 1) > -1)*/) {
@@ -269,7 +269,7 @@ void update_skin_features() {
 		if (PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 1) > -1) ped_prop_idx_1 = PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 1);
 		if (ped_prop_idx_0 > -1 && PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 0) == -1) PED::SET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 0, ped_prop_idx_0, 0, 0);
 		if (ped_prop_idx_1 > -1 && PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 1) == -1) PED::SET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 1, ped_prop_idx_1, 0, 0);
-
+		
 		if (choicevalue == -1 && skinPropsCategoryValueC == 0) {
 			ped_prop_idx_0 = -1;
 			if (PED::GET_PED_PROP_INDEX(PLAYER::PLAYER_PED_ID(), 0) != -1) PED::CLEAR_PED_PROP(PLAYER::PLAYER_PED_ID(), 0);
@@ -298,7 +298,7 @@ void update_skin_features() {
 			if (skin_tick > 200) {
 				ENTDatabase* database = get_database();
 				std::vector<SavedSkinDBRow*> savedSkins = database->get_saved_skins();
-
+				
 				if (!savedSkins.empty()) {
 					Hash model = -1;
 					if (reset_skin == false) {
@@ -306,7 +306,7 @@ void update_skin_features() {
 						reset_skin = true;
 						model = 1;
 					}
-
+					
 					if (savedSkins.at(savedSkins.size() - 1) != NULL) {
 						SavedSkinDBRow* savedSkin = savedSkins.at(savedSkins.size() - 1);
 						database->populate_saved_skin(savedSkin);
@@ -320,11 +320,11 @@ void update_skin_features() {
 
 							if (right_model == false) {
 								Ped ped = PLAYER::PLAYER_PED_ID();
-								for each(SavedSkinComponentDBRow * comp in savedSkin->components) {
+								for each (SavedSkinComponentDBRow * comp in savedSkin->components) {
 									PED::SET_PED_COMPONENT_VARIATION(ped, comp->slotID, comp->drawable, comp->texture, 0);
 								}
 								PED::CLEAR_ALL_PED_PROPS(ped);
-								for each(SavedSkinPropDBRow * prop in savedSkin->props) {
+								for each (SavedSkinPropDBRow * prop in savedSkin->props) {
 									PED::SET_PED_PROP_INDEX(ped, prop->propID, prop->drawable, prop->texture, 0);
 								}
 								for (std::vector<SavedSkinDBRow*>::iterator it = savedSkins.begin(); it != savedSkins.end(); ++it) {
@@ -374,7 +374,7 @@ bool process_skinchanger_texture_menu(std::string caption)
 		{
 			std::ostringstream ss;
 			ss << "Texture #" << i;
-			MenuItem<int>* item = new MenuItem<int>();
+			MenuItem<int> *item = new MenuItem<int>();
 			item->caption = ss.str();
 			item->value = i;
 			menuItems.push_back(item);
@@ -445,7 +445,7 @@ bool process_skinchanger_drawable_menu(std::string caption, int component)
 			std::ostringstream ss;
 			ss << "Drawable #" << i << " ~HUD_COLOUR_GREYLIGHT~(" << textures << ")";
 
-			MenuItem<int>* item = new MenuItem<int>();
+			MenuItem<int> *item = new MenuItem<int>();
 			item->caption = ss.str();
 			item->value = i;
 			item->isLeaf = (textures <= 1);
@@ -525,7 +525,7 @@ bool process_skinchanger_detail_menu()
 				std::string itemText = getSkinDetailAttribDescription(compIndex);
 				ss << "Slot " << (compIndex + 1) << ": " << itemText << " ~HUD_COLOUR_GREYLIGHT~(" << drawables << ")";
 
-				MenuItem<int>* item = new MenuItem<int>();
+				MenuItem<int> *item = new MenuItem<int>();
 				item->caption = ss.str();
 				item->value = compIndex;
 				item->isLeaf = false;
@@ -558,7 +558,7 @@ bool process_skinchanger_choices_players()
 
 	for (int i = 0; i < SKINS_PLAYER_CAPTIONS.size(); i++)
 	{
-		MenuItem<std::string>* item = new MenuItem<std::string>();
+		MenuItem<std::string> *item = new MenuItem<std::string>();
 		item->caption = SKINS_PLAYER_CAPTIONS[i];
 		item->value = SKINS_PLAYER_VALUES[i];
 		item->isLeaf = true;
@@ -587,7 +587,7 @@ bool process_skinchanger_choices_online_npc()
 
 	for (int i = 0; i < SKINS_ONLINE_CAPTIONS.size(); i++)
 	{
-		MenuItem<std::string>* item = new MenuItem<std::string>();
+		MenuItem<std::string> *item = new MenuItem<std::string>();
 		item->caption = SKINS_ONLINE_CAPTIONS[i];
 		item->value = SKINS_ONLINE_VALUES[i];
 		item->isLeaf = true;
@@ -607,7 +607,7 @@ bool process_skinchanger_choices_online_npc()
 bool onconfirm_skinchanger_choices_animals(MenuItem<std::string> choice)
 {
 	skinTypesMenuPositionMemory[1] = choice.currentMenuIndex;
-
+	
 	Vector3 coords_me = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), true);
 	float height = -1.0;
 
@@ -621,7 +621,7 @@ bool onconfirm_skinchanger_choices_animals(MenuItem<std::string> choice)
 		WATER::GET_WATER_HEIGHT(coords_me.x, coords_me.y, coords_me.z, &height);
 		if ((coords_me.z < height) && ((height - coords_me.z) > 1)) applyChosenSkin(choice.value);
 	}
-
+	
 	return false;
 }
 
@@ -631,7 +631,7 @@ bool process_skinchanger_choices_animals()
 
 	for (int i = 0; i < SKINS_ANIMAL_CAPTIONS.size(); i++)
 	{
-		MenuItem<std::string>* item = new MenuItem<std::string>();
+		MenuItem<std::string> *item = new MenuItem<std::string>();
 		item->caption = SKINS_ANIMAL_CAPTIONS[i];
 		item->value = SKINS_ANIMAL_VALUES[i];
 		item->isLeaf = true;
@@ -660,7 +660,7 @@ bool process_skinchanger_choices_misc()
 
 	for (int i = 0; i < SKINS_GENERAL_CAPTIONS.size(); i++)
 	{
-		MenuItem<std::string>* item = new MenuItem<std::string>();
+		MenuItem<std::string> *item = new MenuItem<std::string>();
 		item->caption = SKINS_GENERAL_CAPTIONS[i];
 		item->value = SKINS_GENERAL_VALUES[i];
 		item->isLeaf = true;
@@ -702,42 +702,42 @@ bool onconfirm_skinchanger_choices_test(MenuItem<std::string> choice)
 bool onconfirm_skinchanger_category_menu(MenuItem<int> choice)
 {
 	switch (choice.value) {
-	case 0: //Players
-		process_skinchanger_choices_players();
-		break;
-	case 1: //Animals
-		process_skinchanger_choices_animals();
-		break;
-	case 2: //Misc
-		process_skinchanger_choices_misc();
-		break;
-	case 3: //Online NPCs
-		process_skinchanger_choices_online_npc();
-		break;
-	case 4: //Custom entry
-	{
-		keyboard_on_screen_already = true;
-		curr_message = "Enter model skin name (e.g. csb_agent):"; // change your skin
-		std::string result = show_keyboard("Enter Name Manually", (char*)lastCustomSkinSpawn.c_str());
-		if (!result.empty())
+		case 0: //Players
+			process_skinchanger_choices_players();
+			break;
+		case 1: //Animals
+			process_skinchanger_choices_animals();
+			break;
+		case 2: //Misc
+			process_skinchanger_choices_misc();
+			break;
+		case 3: //Online NPCs
+			process_skinchanger_choices_online_npc();
+			break;
+		case 4: //Custom entry
 		{
-			result = trim(result);
-			lastCustomSkinSpawn = result;
-			Hash hash = GAMEPLAY::GET_HASH_KEY((char*)result.c_str());
-			if (!STREAMING::IS_MODEL_IN_CDIMAGE(hash) || !STREAMING::IS_MODEL_VALID(hash))
+			keyboard_on_screen_already = true;
+			curr_message = "Enter model skin name (e.g. csb_agent):"; // change your skin
+			std::string result = show_keyboard("Enter Name Manually", (char*)lastCustomSkinSpawn.c_str());
+			if (!result.empty())
 			{
-				std::ostringstream ss;
-				ss << "Couldn't find model '" << result << "'";
-				set_status_text(ss.str());
-				return false;
+				result = trim(result);
+				lastCustomSkinSpawn = result;
+				Hash hash = GAMEPLAY::GET_HASH_KEY((char*)result.c_str());
+				if (!STREAMING::IS_MODEL_IN_CDIMAGE(hash) || !STREAMING::IS_MODEL_VALID(hash))
+				{
+					std::ostringstream ss;
+					ss << "Couldn't find model '" << result << "'";
+					set_status_text(ss.str());
+					return false;
+				}
+				else
+				{
+					return applyChosenSkin(hash);
+				}
 			}
-			else
-			{
-				return applyChosenSkin(hash);
-			}
+			return false;
 		}
-		return false;
-	}
 	}
 	return false;
 }
@@ -749,48 +749,48 @@ bool onconfirm_skinchanger_menu(MenuItem<int> choice)
 	int index = PED::GET_PED_PROP_INDEX(playerPed, 0);
 
 	switch (activeLineIndexSkinChanger) { // choice.value
-	case 0:
-		process_savedskin_menu();
-		break;
-	case 1: //Change skin
-		process_skinchanger_category_menu();
-		break;
-	case 2: //Detail
-		process_skinchanger_detail_menu();
-		break;
-	case 3:
-		process_prop_menu();
-		break;
-	case 4: //Reset
-		PED::SET_PED_DEFAULT_COMPONENT_VARIATION(playerPed);
-		set_status_text("Using default model skin");
-		break;
-	case 5:
-		PED::CLEAR_ALL_PED_PROPS(playerPed);
-		clear_props_m = -1;
-		ped_prop_idx = -1;
-		break;
-	case 6:
-		PED::CLEAR_ALL_PED_PROPS(playerPed);
-		PED::SET_PED_RANDOM_COMPONENT_VARIATION(playerPed, true);
-		PED::SET_PED_RANDOM_PROPS(playerPed);
-		break;
-	case 7:
-		PED::CLEAR_ALL_PED_PROPS(playerPed);
-		PED::SET_PED_RANDOM_PROPS(playerPed);
-		break;
-	case 8:
-		if (helmet_on == false) {
-			Hash model = -1;
-			if (PED::GET_PED_TYPE(playerPed) == 0) model = GAMEPLAY::GET_HASH_KEY("player_zero");
-			if (PED::GET_PED_TYPE(playerPed) == 1) model = GAMEPLAY::GET_HASH_KEY("player_one");
-			if (PED::GET_PED_TYPE(playerPed) == 2 || PED::GET_PED_TYPE(playerPed) == 3) model = GAMEPLAY::GET_HASH_KEY("player_two");
-			applyChosenSkin(model);
-			helmet_on = true;
-		}
-		int temp_choice = rand() % 15 + 0;
-		PED::GIVE_PED_HELMET(playerPed, 1, 4096, temp_choice);
-		break;
+		case 0:
+			process_savedskin_menu();
+			break;
+		case 1: //Change skin
+			process_skinchanger_category_menu();
+			break;
+		case 2: //Detail
+			process_skinchanger_detail_menu();
+			break;
+		case 3:
+			process_prop_menu();
+			break;
+		case 4: //Reset
+			PED::SET_PED_DEFAULT_COMPONENT_VARIATION(playerPed);
+			set_status_text("Using default model skin");
+			break;
+		case 5:
+			PED::CLEAR_ALL_PED_PROPS(playerPed);
+			clear_props_m = -1;
+			ped_prop_idx = -1;
+			break;
+		case 6:
+			PED::CLEAR_ALL_PED_PROPS(playerPed);
+			PED::SET_PED_RANDOM_COMPONENT_VARIATION(playerPed, true);
+			PED::SET_PED_RANDOM_PROPS(playerPed);
+			break;
+		case 7:
+			PED::CLEAR_ALL_PED_PROPS(playerPed);
+			PED::SET_PED_RANDOM_PROPS(playerPed);
+			break;
+		case 8:
+			if (helmet_on == false) {
+				Hash model = -1;
+				if (PED::GET_PED_TYPE(playerPed) == 0) model = GAMEPLAY::GET_HASH_KEY("player_zero");
+				if (PED::GET_PED_TYPE(playerPed) == 1) model = GAMEPLAY::GET_HASH_KEY("player_one");
+				if (PED::GET_PED_TYPE(playerPed) == 2 || PED::GET_PED_TYPE(playerPed) == 3) model = GAMEPLAY::GET_HASH_KEY("player_two");
+				applyChosenSkin(model);
+				helmet_on = true;
+			}
+			int temp_choice = rand() % 15 + 0;
+			PED::GIVE_PED_HELMET(playerPed, 1, 4096, temp_choice);
+			break;
 	}
 	return false;
 }
@@ -800,7 +800,7 @@ int skinCategoryPosition = 0;
 bool process_skinchanger_category_menu()
 {
 	std::vector<MenuItem<int>*> menuItems;
-	MenuItem<int>* item;
+	MenuItem<int> *item;
 
 	int i = 0;
 
@@ -840,10 +840,10 @@ bool process_skinchanger_category_menu()
 bool process_skinchanger_menu()
 {
 	std::vector<MenuItem<int>*> menuItems;
-	SelectFromListMenuItem* listItem;
+	SelectFromListMenuItem *listItem;
 	ToggleMenuItem<int>* toggleItem;
-	MenuItem<int>* item;
-
+	MenuItem<int> *item;
+	
 	int i = 0;
 
 	item = new MenuItem<int>();
@@ -881,7 +881,7 @@ bool process_skinchanger_menu()
 	item->value = i++;
 	item->isLeaf = true;
 	menuItems.push_back(item);
-
+	
 	item = new MenuItem<int>();
 	item->caption = "Randomize Appearance";
 	item->value = i++;
@@ -940,7 +940,7 @@ bool onconfirm_props_texture_menu(MenuItem<int> choice)
 void onhighlight_props_texture_menu(MenuItem<int> choice)
 {
 	Ped playerPed = PLAYER::PLAYER_PED_ID();
-	PED::SET_PED_PROP_INDEX(playerPed, skinPropsCategoryValue, skinPropsDrawablePosition[skinPropsCategoryValue] - 1, choice.value, 0);
+	PED::SET_PED_PROP_INDEX(playerPed, skinPropsCategoryValue, skinPropsDrawablePosition[skinPropsCategoryValue]-1, choice.value, 0);
 }
 
 bool process_prop_texture_menu()
@@ -952,12 +952,12 @@ bool process_prop_texture_menu()
 	int thisDrawable = skinPropsDrawablePosition[skinPropsCategoryValue] - 1;
 	int textures = PED::GET_NUMBER_OF_PED_PROP_TEXTURE_VARIATIONS(PLAYER::PLAYER_PED_ID(), skinPropsCategoryValue, thisDrawable);
 
-	for (int i = 0; i < textures; i++)
+	for (int i=0; i < textures; i++)
 	{
 		bool iFound = false;
 		int compIndex = i;
 
-		MenuItem<int>* item = new MenuItem<int>();
+		MenuItem<int> *item = new MenuItem<int>();
 
 		std::ostringstream ss;
 		ss << "Texture #" << (i + 1);
@@ -1025,7 +1025,7 @@ bool process_prop_drawable_menu()
 		int textures = 0;
 		//if (drawables > 1 || textures != 0)
 		{
-			MenuItem<int>* item = new MenuItem<int>();
+			MenuItem<int> *item = new MenuItem<int>();
 
 			if (i == -1)
 			{
@@ -1076,13 +1076,13 @@ bool process_prop_menu()
 		int drawables = PED::GET_NUMBER_OF_PED_PROP_DRAWABLE_VARIATIONS(PLAYER::PLAYER_PED_ID(), compIndex);
 		if (drawables > 0)
 		{
-			MenuItem<int>* item = new MenuItem<int>();
+			MenuItem<int> *item = new MenuItem<int>();
 
 			std::ostringstream ss;
-
-			std::string itemText = getPropDetailAttribDescription(compIndex);
-			ss << "Slot " << (compIndex + 1) << ": " << itemText << " ~HUD_COLOUR_GREYLIGHT~(" << drawables << ")";
-			item->caption = ss.str();
+			
+				std::string itemText = getPropDetailAttribDescription(compIndex);
+				ss << "Slot " << (compIndex + 1) << ": " << itemText << " ~HUD_COLOUR_GREYLIGHT~(" << drawables << ")";
+				item->caption = ss.str();
 
 			item->value = compIndex;
 			item->isLeaf = false;
@@ -1197,15 +1197,15 @@ bool process_savedskin_menu()
 
 		std::vector<MenuItem<int>*> menuItems;
 
-		MenuItem<int>* item = new MenuItem<int>();
+		MenuItem<int> *item = new MenuItem<int>();
 		item->isLeaf = true;
 		item->value = -1;
 		item->caption = "Create New Skin Save";
 		menuItems.push_back(item);
 
-		for each(SavedSkinDBRow * sv in savedSkins)
+		for each (SavedSkinDBRow *sv in savedSkins)
 		{
-			MenuItem<int>* item = new MenuItem<int>();
+			MenuItem<int> *item = new MenuItem<int>();
 			item->isLeaf = false;
 			item->value = sv->rowID;
 			item->caption = sv->saveName;
@@ -1233,7 +1233,7 @@ bool process_savedskin_slot_menu(int slot)
 
 		std::vector<MenuItem<int>*> menuItems;
 
-		MenuItem<int>* item = new MenuItem<int>();
+		MenuItem<int> *item = new MenuItem<int>();
 		item->isLeaf = true;
 		item->value = 1;
 		item->caption = "Apply To Player";
@@ -1275,13 +1275,13 @@ bool spawn_saved_skin(int slot, std::string caption)
 
 	Ped ped = PLAYER::PLAYER_PED_ID();
 
-	for each(SavedSkinComponentDBRow * comp in savedSkin->components)
+	for each (SavedSkinComponentDBRow *comp in savedSkin->components)
 	{
-		PED::SET_PED_COMPONENT_VARIATION(ped, comp->slotID, comp->drawable, comp->texture, 0);
+		PED::SET_PED_COMPONENT_VARIATION( ped, comp->slotID, comp->drawable, comp->texture, 0);
 	}
 
 	PED::CLEAR_ALL_PED_PROPS(ped);
-	for each(SavedSkinPropDBRow * prop in savedSkin->props)
+	for each (SavedSkinPropDBRow *prop in savedSkin->props)
 	{
 		PED::SET_PED_PROP_INDEX(ped, prop->propID, prop->drawable, prop->texture, 0);
 	}
@@ -1319,7 +1319,7 @@ void save_current_skin(int slot)
 		if (!result.empty())
 		{
 			ENTDatabase* database = get_database();
-
+			
 			if (database->save_skin(playerPed, result, slot))
 			{
 				activeSavedSkinSlotName = result;

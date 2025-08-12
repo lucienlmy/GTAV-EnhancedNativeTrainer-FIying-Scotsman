@@ -1,4 +1,4 @@
-﻿/*
+/*
 Some of this code began its life as a part of GTA V SCRIPT HOOK SDK.
 http://dev-c.com
 (C) Alexander Blade 2015
