@@ -1119,6 +1119,22 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("TAMPA4"), "sssa_dlc_2025_1", "tampa4" },
 	{ RAGE_JOAAT("WOODLANDER"), "sssa_dlc_2025_1", "woodlander" },
 	{ RAGE_JOAAT("MAVERICK2"), "elt_default", "maverick" },
+	//"Home in the Hills" Mansion DLC
+	{ RAGE_JOAAT("POLBUFFALO"), "candc_dlc_2025_2", "polbuffalo" },
+	{ RAGE_JOAAT("POLBUFFALO6"), "candc_dlc_2025_2", "polbuffalo6" },
+	{ RAGE_JOAAT("ASTRALE"), "lgm_dlc_2025_2", "astrale" },
+	{ RAGE_JOAAT("FMJ2"), "lgm_dlc_2025_2", "fmj2" },
+	{ RAGE_JOAAT("GT750"), "lgm_dlc_2025_2", "gt750" },
+	{ RAGE_JOAAT("ITALI2"), "lgm_dlc_2025_2", "itali2" },
+	{ RAGE_JOAAT("LUIVA"), "lgm_dlc_2025_2", "luiva" },
+	{ RAGE_JOAAT("XTREME"), "lgm_dlc_2025_2", "xtreme" },
+	{ RAGE_JOAAT("SENTINEL6"), "sssa_dlc_2025_2", "sentinel6" },
+	{ RAGE_JOAAT("VIVANITE2"), "", "" }, //No image?
+	{ RAGE_JOAAT("KEITORA"), "sssa_dlc_2025_2", "keitora" },
+	{ RAGE_JOAAT("DRIFTDOMINATOR9"), "", "" }, //No image?
+	{ RAGE_JOAAT("DRIFTKEITORA"), "", "" }, //No image?
+	{ RAGE_JOAAT("DRIFTRT3000"), "", "" }, //No image?
+	{ RAGE_JOAAT("DRIFTSENTINEL2"), "", "" } //No image?
 };
 
 /***
