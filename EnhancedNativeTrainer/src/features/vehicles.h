@@ -1103,7 +1103,13 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("BANSHEE3"), "lgm_dlc_2024_2", "banshee3" }, //
 	{ RAGE_JOAAT("COQUETTE6"), "lgm_dlc_2024_2", "coquette6" }, //
 	{ RAGE_JOAAT("JESTER5"), "lgm_dlc_2024_2", "jester5" },
+	{ RAGE_JOAAT("DRIFTJESTER3"), "ENT_vehicle_previews", "VP_DRIFTJESTER3" },
 	{ RAGE_JOAAT("DUSTER2"), "elt_dlc_2024_2", "duster2" },
+	{ RAGE_JOAAT("POLCOQUETTE4"), "ENT_vehicle_previews", "VP_POLCOQUETTE4" },
+	{ RAGE_JOAAT("POLCARACARA"), "ENT_vehicle_previews", "VP_POLCARACARA" },
+	{ RAGE_JOAAT("POLFACTION2"), "ENT_vehicle_previews", "VP_POLFACTION2" },
+	{ RAGE_JOAAT("FREIGHTCAR3"), "ENT_vehicle_previews", "VP_FREIGHTCAR3" },
+	{ RAGE_JOAAT("POLTERMINUS"), "ENT_vehicle_previews", "VP_POLTERMINUS" },
 	//Summer 2025 - Money Fronts
 	{ RAGE_JOAAT("POLICEB2"), "candc_dlc_2025_1", "policeb2" },
 	{ RAGE_JOAAT("STOCKADE4"), "candc_dlc_2025_1", "stockade4" },
@@ -1113,6 +1119,7 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("SENTINEL5"), "lgm_dlc_2025_1", "sentinel5" },
 	{ RAGE_JOAAT("SUZUME"), "lgm_dlc_2025_1", "suzume" },
 	{ RAGE_JOAAT("DRIFTL352"), "sssa_dlc_2025_1", "driftl352" },
+	{ RAGE_JOAAT("FLATBED2"), "ENT_vehicle_previews", "VP_FLATBED2" },
 	{ RAGE_JOAAT("HARDY"), "sssa_dlc_2025_1", "hardy" },
 	{ RAGE_JOAAT("L352"), "sssa_dlc_2025_1", "l352" },
 	{ RAGE_JOAAT("MINIMUS"), "sssa_dlc_2025_1", "minimus" },
@@ -1129,12 +1136,12 @@ const std::vector<VehicleImage> INGAME_VEH_IMAGES =
 	{ RAGE_JOAAT("LUIVA"), "lgm_dlc_2025_2", "luiva" },
 	{ RAGE_JOAAT("XTREME"), "lgm_dlc_2025_2", "xtreme" },
 	{ RAGE_JOAAT("SENTINEL6"), "sssa_dlc_2025_2", "sentinel6" },
-	{ RAGE_JOAAT("VIVANITE2"), "", "" }, //No image?
 	{ RAGE_JOAAT("KEITORA"), "sssa_dlc_2025_2", "keitora" },
-	{ RAGE_JOAAT("DRIFTDOMINATOR9"), "", "" }, //No image?
-	{ RAGE_JOAAT("DRIFTKEITORA"), "", "" }, //No image?
-	{ RAGE_JOAAT("DRIFTRT3000"), "", "" }, //No image?
-	{ RAGE_JOAAT("DRIFTSENTINEL2"), "", "" } //No image?
+	{ RAGE_JOAAT("VIVANITE2"), "ENT_vehicle_previews", "VP_VIVANITE2" }, 
+	{ RAGE_JOAAT("DRIFTDOMINATOR9"), "sssa_dlc_2023_2", "dominator9" }, 
+	{ RAGE_JOAAT("DRIFTKEITORA"), "sssa_dlc_2025_2", "keitora" }, 
+	{ RAGE_JOAAT("DRIFTRT3000"), "sssa_dlc_tuner", "rt3000" }, 
+	{ RAGE_JOAAT("DRIFTSENTINEL2"), "sssa_dlc_business2", "sentinel" }
 };
 
 /***

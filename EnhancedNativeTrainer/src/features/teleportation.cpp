@@ -357,6 +357,10 @@ const std::vector<tele_location> LOCATIONS_ONLINE = {
 	{ "IAA Server Hub", 2168.08900000f, 2920.89000000f, -85.80049000f, { "xm_x17dlc_int_placement_interior_5_x17dlc_int_facility2_milo_" }, {}, {}, false },
 	{ "IAA Underground Facility", 2047.0f, 2942.0f, -62.90245f, { "xm_x17dlc_int_placement_interior_4_x17dlc_int_facility_milo_" }, {}, {}, false },
 	{ "Lombank Office: Style 1", -1573.84900000f, -571.02540000f, 107.52290000f, { "ex_sm_13_office_01a" }, {}, {}, false },
+	{ "Mansion Interior A", -1666.36800000f, 478.92710000f, 128.22160000f, { "m25_2_ch1_06e_mansion_interior_a" }, {}, { IPL_PROPS_MANSION }, false },
+	{ "Mansion Interior B", -1679.87700000f, 493.59600000f, 112.93510000f, { "m25_2_ch1_06e_mansion_interior_b" }, {}, {}, false },
+	{ "Mansion Interior C", -1649.63000000f, 480.97790000f, 117.36450000f, { "m25_2_ch1_06e_mansion_interior_c" }, {}, {}, false },
+	//{ "Mansion Interior D", -1679.87700000f, 493.59600000f, 56.45711000f, { "m25_2_ch1_06e_mansion_interior_d" }, {}, {}, false },
 	{ "Maze Bank Del Perro Office: Style 1", -1384.56400000f, -478.26990000f, 71.04205000f, { "ex_sm_15_office_01a" }, {}, {}, false },
 	{ "Merryweather R&D Centre", -1876.62100000f, 3750.00000000f, -100.00000000f, { "M23_1_int_placement_m23_1_interior_2_dlc_int_01_m23_1_milo_" }, {}, {}, false },
 	{ "Mission Row Underground Winning Garage", 400.09610000f, -956.67870000f, -100.00000000f},
@@ -389,6 +393,12 @@ const std::vector<tele_location> LOCATIONS_ONLINE = {
 	{ "Weazel Plaza Apt 9", -909.10170000f, -438.19030000f, 114.39970000f, { "hw1_blimp_interior_v_apartment_high_milo__9" }, {}, {}, false },
 	{ "Weazel Plaza Apt 11", -889.30300000f, -451.77510000f, 119.32700000f, { "hw1_blimp_interior_v_apartment_high_milo__11" }, {}, {}, false },
 	//
+	//{ "Mansion 09 Interior A", -2586.06500000f, 1909.99500000f, 166.37540000f, { "m25_2_ch1_09_mansion_interior_a" }, {}, {}, false },
+	//{ "Mansion 09 Interior B", -2587.49600000f, 1893.19300000f, 155.51830000f, { "m25_2_ch1_09_mansion_interior_b" }, {}, {}, false },
+	//{ "Mansion 09 Interior C", -2568.93400000f, 1920.20300000f, 151.08980000f, { "m25_2_ch1_09_mansion_interior_c" }, {}, {}, false },
+	//{ "Mansion 04 Interior A", 539.70120000f, 749.08940000f, 201.36170000f, { "m25_2_ch2_04_mansion_interior_a" }, {}, {}, false },
+	//{ "Mansion 04 Interior B", 547.49550000f, 734.13600000f, 190.50450000f, { "m25_2_ch2_04_mansion_interior_b" }, {}, {}, false },
+	//{ "Mansion 04 Interior C", 548.69640000f, 766.88680000f, 186.07600000f, { "m25_2_ch2_04_mansion_interior_c" }, {}, {}, false },
 	//{ "Tycoon Studio Lo", -24.58899000f, -73.79967000f, -75.00000000f, { "m25_1_int_placement_interior_int_tycoon_studio_lo_milo_" }, {}, {}, false },
 	//{ "Tycoon Studio Mid", 60.36966000f, -80.91821000f, -75.00000000f, { "m25_1_int_placement_interior_int_tycoon_studio_mid_milo_" }, {}, {}, false },
 }; 
