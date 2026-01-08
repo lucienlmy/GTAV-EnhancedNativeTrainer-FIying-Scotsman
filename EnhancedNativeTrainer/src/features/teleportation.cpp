@@ -317,7 +317,7 @@ const std::vector<tele_location> LOCATIONS_ONLINE = {
 	{ "Casino Hotel", 2504.38600000f, -257.21960000f, -40.12296000f, { "ch_int_placement_ch_interior_4_dlc_casino_hotel_milo_" }, {}, {}, false },
 	//{ "Casino Loading Bay", 2553.96300000f, -281.38050000f, -65.72305000f, { "ch_int_placement_ch_interior_5_dlc_casino_loading_milo_" }, {}, {}, false },
 	{ "Casino Loading Bay", 858.00000000f, -2275.00000000f, -49.00000000f, { "m23_2_int_placement_m23_2_interior_0_dlc_int_casinobase_milo_ " }, {}, {}, false },
-	{ "Casino Main Hall", 1100.0000f, 220.0000f, -50.0000f, { "vw_casino_main" }, {}, {}, false },
+	{ "Casino Main Hall", 1090.0000f, 210.0000f, -50.0000f, { "vw_casino_main" }, {}, {}, false },
 	{ "Casino Penthouse", 976.6364f, 70.29476f, 115.1641f, { "vw_casino_penthouse" }, {}, { IPLS_CASINO_PENTHOUSE }, false },
 	{ "Casino Shaft", 2572.88800000f, -253.43860000f, -65.65990000f, { "ch_int_placement_ch_interior_9_dlc_casino_shaft_milo_" }, {}, {}, false },
 	{ "Casino Utility", 2519.87600000f, -255.30270000f, -25.11497000f, { "ch_int_placement_ch_interior_7_dlc_casino_utility_milo_" }, {}, {}, false },
