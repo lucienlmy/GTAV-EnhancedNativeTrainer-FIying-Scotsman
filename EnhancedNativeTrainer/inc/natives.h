@@ -2546,6 +2546,7 @@ namespace INTERIOR
 	static BOOL _ARE_COORDS_COLLIDING_WITH_EXTERIOR(float x, float y, float z) { return invoke<BOOL>(0xEEA5AC2EDA7C33E8, x, y, z); } // 0xEEA5AC2EDA7C33E8 0x7762249C
 	static int GET_INTERIOR_FROM_COLLISION(float x, float y, float z) { return invoke<int>(0xEC4CF9FCB29A4424, x, y, z); } // 0xEC4CF9FCB29A4424 0x7ED33DC1
 	static void _ENABLE_INTERIOR_PROP(int interiorID, char* propName) { invoke<Void>(0x55E86AF2712B36A1, interiorID, propName); } // 0x55E86AF2712B36A1 0xC80A5DDF
+	//static void ACTIVATE_INTERIOR_ENTITY_SET(int interior, char* entitySetName) { invoke<Void>(0x55E86AF2712B36A1, interior, entitySetName); } // 0x55E86AF2712B36A1 0xC80A5DDF
 	static void _DISABLE_INTERIOR_PROP(int interiorID, char* propName) { invoke<Void>(0x420BD37289EEE162, interiorID, propName); } // 0x420BD37289EEE162 0xDBA768A1
 	static BOOL _IS_INTERIOR_PROP_ENABLED(int interiorID, char* propName) { return invoke<BOOL>(0x35F7DD45E8C0A16D, interiorID, propName); } // 0x35F7DD45E8C0A16D 0x39A3CC6F
 	static void REFRESH_INTERIOR(int interiorID) { invoke<Void>(0x41F37C3427C75AE0, interiorID); } // 0x41F37C3427C75AE0 0x9A29ACE6
