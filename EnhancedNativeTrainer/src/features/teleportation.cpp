@@ -1760,9 +1760,6 @@ void update_teleport_features(){
 	{
 		househill_tick = househill_tick + 1;
 		if (househill_tick > 400) { // 1000
-
-			//STREAMING::REMOVE_IPL("hei_ch1_09_props_original");
-
 			for (int i = 0; i < IPL_PROPS_MANSION.size(); i++) {
 				if (!STREAMING::IS_IPL_ACTIVE(IPL_PROPS_MANSION[i]))
 				{
@@ -1770,7 +1767,7 @@ void update_teleport_features(){
 				}
 			}
 
-			int MainFloor = INTERIOR::GET_INTERIOR_AT_COORDS(-1666.36f, 478.92f, 128.22f);
+			/*int MainFloor = INTERIOR::GET_INTERIOR_AT_COORDS(-1666.36f, 478.92f, 128.22f);
 			if (INTERIOR::IS_VALID_INTERIOR(MainFloor))
 			{
 				INTERIOR::_LOAD_INTERIOR(MainFloor);
@@ -1799,7 +1796,7 @@ void update_teleport_features(){
 
 				if (INTERIOR::IS_INTERIOR_CAPPED(GarageFloor)) INTERIOR::CAP_INTERIOR(GarageFloor, 0);
 			}
-			WAIT(500);
+			WAIT(500);*/
 
 			househill_init = true;
 		}
@@ -1816,9 +1813,18 @@ void update_teleport_features(){
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_msn_bed_01a"), -2576.088f, 1866.078f, 162.7214f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_casino_door_01l"), 520.7849f, 744.874f, 198.984f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_casino_door_01l"), -2604.295f, 1916.571f, 163.9978f, 0, 0.0, 50.0, 0);
-		//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("h4_prop_h4_door_03a"), 4965.726f, -5787.68f, 21.10873f, 0, 0.0, 50.0, 0);
-		//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("h4_prop_h4_door_03a"), 5085.588f, -5733.124f, 15.9526f, 0, 0.0, 50.0, 0);
-		//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("h4_prop_h4_door_03a"), 5082.088f, -5737.809f, 15.9526f, 0, 0.0, 50.0, 0);
+		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_lrggate_01c_l"), -2559.193f, 1910.86f, 169.0709f, 0, 0.0, 50.0, 0);
+		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_lrggate_01c_r"), -2556.658f, 1915.716f, 169.0709f, 0, 0.0, 50.0, 0);
+		//
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_props_original")) STREAMING::REMOVE_IPL("hei_ch1_09_props_original");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_props_original")) STREAMING::REMOVE_IPL("hei_ch1_06e_props_original");
+		if (STREAMING::IS_IPL_ACTIVE("apa_ch2_04_props_original")) STREAMING::REMOVE_IPL("apa_ch2_04_props_original");
+		if (STREAMING::IS_IPL_ACTIVE("apa_ch2_04_mansion_original")) STREAMING::REMOVE_IPL("apa_ch2_04_mansion_original");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_mansion_original")) STREAMING::REMOVE_IPL("hei_ch1_09_mansion_original");
+		//
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_mansion_generic")) STREAMING::REMOVE_IPL("hei_ch1_06e_mansion_generic");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_mansion_generic")) STREAMING::REMOVE_IPL("hei_ch1_09_mansion_generic");
+		//
 	}
 	if ((!featureHouseOnHill && househill_tick > 0) || DLC2::GET_IS_LOADING_SCREEN_ACTIVE()) {
 		househill_init = false;
