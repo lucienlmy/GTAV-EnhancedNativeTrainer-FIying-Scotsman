@@ -750,10 +750,7 @@ const std::vector<char*> IPL_PROPS_CEO_OFFICE = {
 //const std::vector<char*> IPL_PROPS_MANSION = {
 const std::vector<const char*> IPL_PROPS_MANSION = {
 	"m25_2_int_placement",
-	"hei_ch1_06e_mansion_generic",
 	"hei_ch1_06e_mansion_railings_m",
-	"hei_ch1_06e_mansion_railings_p",
-	"hei_ch1_06e_mansion_shutters",
 	"m25_2_ch1_06e_mansion_interior_a",
 	"m25_2_ch1_06e_mansion_interior_b",
 	"m25_2_ch1_06e_mansion_interior_c",
@@ -773,11 +770,8 @@ const std::vector<const char*> IPL_PROPS_MANSION = {
 	"hei_ch1_06f_mansion_original",
 	"hei_ch1_06e_mansion_ground",
 	"hei_ch1_06e_original_terrain",
-	"apa_ch2_04_mansion_generic",
 	"apa_ch2_04_mansion_private",
 	"apa_ch2_04_mansion_railings_m",
-	"apa_ch2_04_mansion_railings_p",
-	"apa_ch2_04_mansion_shutters",
 	"m25_2_ch2_04_mansion_interior_a",
 	"m25_2_ch2_04_mansion_interior_b",
 	"m25_2_ch2_04_mansion_interior_c",
@@ -791,11 +785,8 @@ const std::vector<const char*> IPL_PROPS_MANSION = {
 	"apa_ch2_04_mansion_firepit",
 	"m25_2_east_mansion_gym",
 	"m25_2_east_dog_house",
-	"hei_ch1_09_mansion_generic",
 	"hei_ch1_09_mansion_private",
 	"hei_ch1_09_mansion_railings_m",
-	"hei_ch1_09_mansion_railings_p",
-	"hei_ch1_09_mansion_shutters",
 	"m25_2_ch1_09_mansion_interior_a",
 	"m25_2_ch1_09_mansion_interior_b",
 	"m25_2_ch1_09_mansion_interior_c",
@@ -809,7 +800,7 @@ const std::vector<const char*> IPL_PROPS_MANSION = {
 	"m25_2_tongva_mansion_gym",
 	"m25_2_tongva_dog_house",
 	//
-	"m25_2_int_mansion",
+	/*"m25_2_int_mansion",
 	"m25_2_int_01_wp_subtle_wall_09",
 	"m25_2_int_01_wp_subtle_wall_08",
 	"m25_2_int_01_wp_subtle_wall_07",
@@ -1532,7 +1523,7 @@ const std::vector<const char*> IPL_PROPS_MANSION = {
 	"m25_2_int_03_blends2a",
 	"m25_2_int_03_blends",
 	"m25_2_int_03_bamboo_panels001",
-	"m25_2_int_03",
+	"m25_2_int_03",*/
 };
 
 const std::vector<const char*> IPL_PROPS_DOOMSDAY_MAIN_BASE = {

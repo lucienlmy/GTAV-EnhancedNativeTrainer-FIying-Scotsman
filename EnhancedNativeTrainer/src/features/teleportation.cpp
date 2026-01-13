@@ -1766,65 +1766,20 @@ void update_teleport_features(){
 					STREAMING::REQUEST_IPL(IPL_PROPS_MANSION[i]);
 				}
 			}
-
-			/*int MainFloor = INTERIOR::GET_INTERIOR_AT_COORDS(-1666.36f, 478.92f, 128.22f);
-			if (INTERIOR::IS_VALID_INTERIOR(MainFloor))
-			{
-				INTERIOR::_LOAD_INTERIOR(MainFloor);
-				STREAMING::SET_INTERIOR_ACTIVE(MainFloor, true);
-				INTERIOR::DISABLE_INTERIOR(MainFloor, false);
-
-				if (INTERIOR::IS_INTERIOR_CAPPED(MainFloor)) INTERIOR::CAP_INTERIOR(MainFloor, 0);
-			}
-			WAIT(500);
-			int LowerFloor = INTERIOR::GET_INTERIOR_AT_COORDS(-1649.63f, 480.97f, 117.36f);
-			if (INTERIOR::IS_VALID_INTERIOR(LowerFloor))
-			{
-				INTERIOR::_LOAD_INTERIOR(LowerFloor);
-				STREAMING::SET_INTERIOR_ACTIVE(LowerFloor, true);
-				INTERIOR::DISABLE_INTERIOR(LowerFloor, false);
-
-				if (INTERIOR::IS_INTERIOR_CAPPED(LowerFloor)) INTERIOR::CAP_INTERIOR(LowerFloor, 0);
-			}
-			WAIT(500);
-			int GarageFloor = INTERIOR::GET_INTERIOR_AT_COORDS(-1679.87f, 493.59f, 112.93f);
-			if (INTERIOR::IS_VALID_INTERIOR(GarageFloor))
-			{
-				INTERIOR::_LOAD_INTERIOR(GarageFloor);
-				STREAMING::SET_INTERIOR_ACTIVE(GarageFloor, true);
-				INTERIOR::DISABLE_INTERIOR(GarageFloor, false);
-
-				if (INTERIOR::IS_INTERIOR_CAPPED(GarageFloor)) INTERIOR::CAP_INTERIOR(GarageFloor, 0);
-			}
-			WAIT(500);*/
-
 			househill_init = true;
 		}
 	}
 	if (featureHouseOnHill && ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID()) && househill_init == true) {
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), -1666.167f, 476.703f, 129.5887f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), -1645.998f, 495.2693f, 129.5887f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), 537.6889f, 748.1211f, 202.7288f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), 562.1526f, 735.7503f, 202.7288f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), -2588.283f, 1910.256f, 167.7426f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_front_door"), -2574.255f, 1886.703f, 167.7426f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_msn_bed_01a"), -1625.437f, 497.7122f, 124.5675f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_msn_bed_01a"), 571.6558f, 717.3541f, 197.7076f, 0, 0.0, 50.0, 0);
-		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("m25_2_prop_m52_door_msn_bed_01a"), -2576.088f, 1866.078f, 162.7214f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_casino_door_01l"), 520.7849f, 744.874f, 198.984f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_casino_door_01l"), -2604.295f, 1916.571f, 163.9978f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_lrggate_01c_l"), -2559.193f, 1910.86f, 169.0709f, 0, 0.0, 50.0, 0);
 		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_lrggate_01c_r"), -2556.658f, 1915.716f, 169.0709f, 0, 0.0, 50.0, 0);
-		//
-		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_props_original")) STREAMING::REMOVE_IPL("hei_ch1_09_props_original");
-		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_props_original")) STREAMING::REMOVE_IPL("hei_ch1_06e_props_original");
 		if (STREAMING::IS_IPL_ACTIVE("apa_ch2_04_props_original")) STREAMING::REMOVE_IPL("apa_ch2_04_props_original");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_props_original")) STREAMING::REMOVE_IPL("hei_ch1_06e_props_original");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_props_original")) STREAMING::REMOVE_IPL("hei_ch1_09_props_original");
 		if (STREAMING::IS_IPL_ACTIVE("apa_ch2_04_mansion_original")) STREAMING::REMOVE_IPL("apa_ch2_04_mansion_original");
+		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_mansion_original")) STREAMING::REMOVE_IPL("hei_ch1_06e_mansion_original");
 		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_mansion_original")) STREAMING::REMOVE_IPL("hei_ch1_09_mansion_original");
-		//
-		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_06e_mansion_generic")) STREAMING::REMOVE_IPL("hei_ch1_06e_mansion_generic");
-		if (STREAMING::IS_IPL_ACTIVE("hei_ch1_09_mansion_generic")) STREAMING::REMOVE_IPL("hei_ch1_09_mansion_generic");
-		//
 	}
 	if ((!featureHouseOnHill && househill_tick > 0) || DLC2::GET_IS_LOADING_SCREEN_ACTIVE()) {
 		househill_init = false;
@@ -1955,41 +1910,8 @@ void update_teleport_features(){
 			OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("v_ilev_carmod3door"), 1182.306f, 2645.232f, 38.63961f, 0, 0.0, 50.0, 0);
 			OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("v_ilev_carmod3door"), 108.8502f, 6617.876f, 32.67305f, 0, 0.0, 50.0, 0);
 			OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("v_ilev_carmod3door"), 114.3135f, 6623.233f, 32.67305f, 0, 0.0, 50.0, 0);
-			//
-			//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_right"), -8.07484400f, 5.36882800, 5.98243700f, 0, 0.0, 50.0, 0);
-			//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_left"), -8.07441900, 7.33433700, 5.98529000f, 0, 0.0, 50.0, 0);
-			//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_d_balcony_r_light"), -8.07500100, 5.36899900, 5.98200100f, 0, 0.0, 50.0, 0);
-			//OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_d_balcony_l_light"), -8.07400100, 7.33400000, 5.98500000f, 0, 0.0, 50.0, 0);
-			//ENTITY::SET_ENTITY_COMPLETELY_DISABLE_COLLISION(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_right"), 1, 0);
-			//ENTITY::SET_ENTITY_COMPLETELY_DISABLE_COLLISION(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_left"), 1, 0);
-			//ENTITY::SET_ENTITY_COMPLETELY_DISABLE_COLLISION(GAMEPLAY::GET_HASH_KEY("prop_d_balcony_r_light"), 1, 0);
-			//ENTITY::SET_ENTITY_COMPLETELY_DISABLE_COLLISION(GAMEPLAY::GET_HASH_KEY("prop_d_balcony_l_light"), 1, 0);
 		}
 	}
-
-	//if (featureChoshopCargoship && ENTITY::DOES_ENTITY_EXIST(PLAYER::PLAYER_PED_ID()) && chopshop_init == true) {
-	//	Vector3 my_coords = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), 0);
-	//	//	float ChopCargo_dist_diff = SYSTEM::VDIST(my_coords.x, my_coords.y, my_coords.z, -400.0109f, -4124.138f, 24.34268f);
-	//	//	if (ChopCargo_dist_diff < 10) { // 2000
-	//	float MichaelBalcony_dist_diff = SYSTEM::VDIST(my_coords.x, my_coords.y, my_coords.z, -816.8055f, 177.0992f, 77.14575f);
-	//	if (MichaelBalcony_dist_diff < 10) { // 2000
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_right"), -8.074844f, 5.368828f, 5.982437f, 0, 0.0, 50.0, 0);
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_right"), -807.343f, 174.9807f, 71.0f, 0, 0.0, 50.0, 0);
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_right"), -816.8055f, 177.0992f, 77.14575f, 0, 0.0, 50.0, 0);
-	//		
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_left"), -8.074419f, 7.334337f, 5.98529f, 0, 0.0, 50.0, 0);
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_left"), -807.343f, 174.9807f, 71.0f, 0, 0.0, 50.0, 0);
-	//		OBJECT::_DOOR_CONTROL(GAMEPLAY::GET_HASH_KEY("prop_door_balcony_left"), -817.5095f, 178.9343f, 77.14861f, 0, 0.0, 50.0, 0);
-	//
-	//		std::stringstream ss55;
-	//		ss55 << "\n MichaelBalcony_dist_diff: " << MichaelBalcony_dist_diff;
-	//		//ss55 << "\n temp_bodyguard: " << temp_bodyguard;
-	//		//ss55 << "\n dist_diff: " << dist_diff;
-	//		//ss55 << "\n temp_dist: " << temp_dist;
-	//		callsPerFrame = 0;
-	//		set_status_text_centre_screen(ss55.str());
-	//	}
-	//}
 	if ((!featureChoshopCargoship && chopshop_tick > 0) || DLC2::GET_IS_LOADING_SCREEN_ACTIVE()) {
 		chopshop_init = false;
 		chopshop_tick = 0;
